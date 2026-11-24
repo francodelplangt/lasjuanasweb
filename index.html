@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Las Juanas · Agrupación de mujeres de Salta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --magenta:#CB0D6E;
+    --magenta-osc:#9E0956;
+    --vino:#5C0833;
+    --rosa:#F9D3E5;
+    --rosa-claro:#FDEEF5;
+    --crema:#F8F6F1;
+    --texto:#2E2A2C;
+    --gris:#5E585B;
+    --titulos:'Montserrat',Arial,sans-serif;
+    --cuerpo:'Work Sans',Arial,sans-serif;
+    --sombra:0 10px 30px rgba(92,8,51,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  html,body{overflow-x:clip}
+  body{font-family:var(--cuerpo);color:var(--texto);background:#fff;font-size:17px;line-height:1.65}
+  img{display:block;max-width:100%}
+  a{color:inherit}
+  h1,h2,h3,h4{font-family:var(--titulos);font-weight:700;line-height:1.2;color:var(--texto)}
+  :focus-visible{outline:3px solid var(--magenta);outline-offset:3px}
+  .w{max-width:1140px;margin:0 auto;padding:0 28px}
+  .pendiente{background:#FFF3C4;color:#6B5200;padding:1px 8px;border-radius:4px;font-size:.85em}
+  .btn{display:inline-block;font-family:var(--titulos);font-weight:700;font-size:.95rem;text-decoration:none;padding:13px 28px;border-radius:6px;border:0;cursor:pointer}
+  .btn-mg{background:var(--magenta);color:#fff}
+  .btn-mg:hover{background:var(--magenta-osc)}
+  .btn-bl{background:#fff;color:var(--magenta)}
+  .btn-bl:hover{background:var(--rosa-claro)}
+  .flecha{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--magenta);color:#fff;text-decoration:none;font-weight:700}
+
+  /* Encabezado */
+  .cabecera{position:absolute;top:0;left:0;right:0;z-index:20;background:rgba(40,8,25,.45);backdrop-filter:blur(4px)}
+  .cabecera .w{display:flex;align-items:center;justify-content:space-between;height:84px}
+  .marca{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff}
+  .marca .logo-svg{height:54px;width:auto}
+  .marca span{font-family:var(--titulos);font-weight:800;font-size:1.1rem;line-height:1.05}
+  .menu{display:flex;align-items:center;gap:30px;list-style:none}
+  .menu a{color:#fff;text-decoration:none;font-family:var(--titulos);font-weight:600;font-size:.92rem}
+  .menu a:not(.btn):hover{color:var(--rosa)}
+  .abrir{display:none;background:none;border:0;cursor:pointer;width:36px;height:28px;position:relative}
+  .abrir span,.abrir::before,.abrir::after{content:"";position:absolute;left:0;right:0;height:3px;background:#fff;border-radius:2px}
+  .abrir::before{top:2px}.abrir span{top:12px}.abrir::after{bottom:2px}
+
+  /* Portada */
+  .portada{position:relative;height:88vh;min-height:560px;max-height:820px;display:flex;align-items:flex-end;color:#fff;background:var(--vino)}
+  .portada > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 35%}
+  .portada::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(40,8,25,.82) 0%,rgba(40,8,25,.6) 38%,rgba(40,8,25,.08) 72%,rgba(40,8,25,0) 100%),linear-gradient(180deg,rgba(40,8,25,.3) 0%,rgba(40,8,25,0) 30%,rgba(40,8,25,.55) 100%)}
+  .portada h1{text-shadow:0 2px 18px rgba(40,8,25,.35)}
+  .portada .w{position:relative;z-index:2;width:100%;padding-bottom:150px}
+  .portada h1{color:#fff;font-size:clamp(2rem,4.2vw,3.1rem);max-width:20ch;margin-bottom:24px}
+
+  /* Cifras */
+  .cifras{position:relative;z-index:5;margin-top:-90px}
+  .cifras .caja{background:#fff;border-radius:10px;box-shadow:var(--sombra);display:grid;grid-template-columns:repeat(3,1fr);padding:34px 20px}
+  .cifra{text-align:center;padding:0 20px}
+  .cifra + .cifra{border-left:1px solid #EEE3E8}
+  .cifra b{display:block;font-family:var(--titulos);font-weight:800;font-size:clamp(2rem,4vw,2.9rem);color:var(--magenta);line-height:1.1}
+  .cifra span{color:var(--gris);font-size:.95rem}
+
+  /* Secciones */
+  .sec{padding:110px 0}
+  .crema{background:var(--crema)}
+  .titulo-sec{font-size:clamp(1.8rem,3.2vw,2.5rem);margin-bottom:18px}
+  .titulo-sec em{font-style:normal;color:var(--magenta)}
+  .bajada{color:var(--gris);max-width:44em;font-size:1.08rem}
+
+  /* Quiénes somos + ejes */
+  .ejes{display:grid;grid-template-columns:1fr 1.15fr;gap:56px;align-items:center}
+  .ejes .foto{border-radius:10px;overflow:hidden;aspect-ratio:4/5}
+  .ejes .foto img{width:100%;height:100%;object-fit:cover;object-position:35% center}
+  .ejes p.bajada{margin-bottom:28px}
+  .tarjetas-ejes{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .eje{background:var(--rosa);border-radius:10px;padding:22px 20px 22px;position:relative}
+  .eje .ico{width:52px;height:52px;border-radius:50%;background:var(--magenta);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+  .eje .ico svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .eje h3{color:var(--vino);font-size:1.05rem;margin-bottom:6px}
+  .eje p{color:#5A2340;font-size:.93rem;line-height:1.5}
+
+  /* Bloque foto + tarjeta superpuesta */
+  .destacado{position:relative;display:grid;grid-template-columns:1.5fr 1fr;align-items:center;margin-top:30px}
+  .destacado .blob{position:absolute;left:-46px;top:-56px;width:190px;height:190px;z-index:0}
+  .destacado .img{position:relative;z-index:1;border-radius:10px;overflow:hidden;aspect-ratio:16/10}
+  .destacado .img img{width:100%;height:100%;object-fit:cover}
+  .destacado .tarj{position:relative;z-index:2;background:#fff;border-radius:10px;box-shadow:var(--sombra);padding:34px 32px;margin-left:-70px}
+  .destacado .tarj h3{font-size:1.4rem;margin-bottom:10px}
+  .destacado .tarj p{color:var(--gris);font-size:.98rem;margin-bottom:18px}
+  .destacado.inv{grid-template-columns:1fr 1.5fr}
+  .destacado.inv .img{order:2}
+  .destacado.inv .tarj{order:1;margin-left:0;margin-right:-70px}
+  .destacado.inv .blob{left:auto;right:-46px;top:auto;bottom:-56px}
+
+  /* Integrantes */
+  .equipo{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px}
+  .persona{background:#fff;border-radius:10px;box-shadow:var(--sombra);display:flex;flex-direction:column;overflow:hidden}
+  .persona img{width:100%;aspect-ratio:4/4.2;height:auto;object-fit:cover;object-position:center 20%;display:block}
+  .persona .datos{padding:22px 24px 22px;flex:1}
+  .persona h3{font-size:1.25rem}
+  .persona .rol{display:inline-block;background:var(--rosa-claro);color:var(--magenta-osc);font-family:var(--titulos);font-weight:600;font-size:.8rem;padding:4px 10px;border-radius:4px;margin:8px 0 12px}
+  .persona ul{list-style:none;color:var(--gris);font-size:.94rem}
+  .persona li{padding-left:16px;position:relative;margin-bottom:4px}
+  .persona li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--magenta)}
+  .persona .datos{display:flex;flex-direction:column}
+  .persona .rol{align-self:flex-start}
+  .ver-cv{align-self:flex-start;margin-top:auto;background:none;border:0;border-top:1px solid #EEE3E8;width:100%;text-align:left;padding:12px 0 0;font-family:var(--titulos);font-weight:700;font-size:.85rem;color:var(--magenta);cursor:pointer}
+  .ver-cv::after{content:" →"}
+  .ver-cv:hover{color:var(--magenta-osc)}
+  .persona ul{margin-bottom:14px}
+  .cv-modal{position:fixed;inset:0;background:rgba(40,8,25,.72);display:none;align-items:center;justify-content:center;z-index:60;padding:24px}
+  .cv-modal.abierto{display:flex}
+  .cv-caja{background:#fff;border-radius:12px;max-width:680px;width:100%;max-height:86vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.3)}
+  .cv-cab{display:flex;gap:18px;align-items:center;padding:24px 28px;background:var(--rosa-claro);position:relative}
+  .cv-cab img{width:84px;height:84px;border-radius:50%;object-fit:cover;object-position:center 20%;flex-shrink:0}
+  .cv-cab h3{font-size:1.3rem}
+  .cv-cab>div{padding-right:44px}
+  .cv-cab .rol{display:inline-block;color:var(--magenta-osc);font-family:var(--titulos);font-weight:600;font-size:.82rem;margin-top:4px}
+  .cv-cerrar{position:absolute;top:14px;right:16px;width:36px;height:36px;border-radius:50%;border:0;background:#fff;color:var(--magenta);font-size:1.4rem;line-height:1;cursor:pointer}
+  .cv-cuerpo{padding:22px 28px 28px;overflow-y:auto;color:var(--gris);font-size:.93rem}
+  .cv-cuerpo p{font-style:italic;margin-bottom:6px}
+  .cv-cuerpo h4{font-family:var(--titulos);font-size:.9rem;color:var(--magenta-osc);margin:18px 0 8px}
+  .cv-cuerpo h4:first-child{margin-top:0}
+  .cv-cuerpo ul{list-style:none}
+  .cv-cuerpo li{padding-left:16px;position:relative;margin-bottom:6px}
+  .cv-cuerpo li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--magenta)}
+  .cv-cuerpo p.perfil{font-style:normal;line-height:1.55}
+  .cv-cuerpo li ul{margin:6px 0 10px}
+  .cv-cuerpo li li{font-size:.88rem;margin-bottom:3px}
+  .cv-cuerpo li li::before{background:none;border:1.5px solid var(--magenta);width:6px;height:6px}
+  .cv-cuerpo p.perfil{margin-bottom:10px}
+  .cv-cuerpo p.lema{font-size:1rem;color:var(--magenta-osc);margin-bottom:8px}
+  .cv-cuerpo p.titulos-cv{font-style:normal;font-family:var(--titulos);font-weight:600;font-size:.84rem;line-height:1.5;margin-bottom:4px}
+  .cv-cuerpo p.cierre{font-weight:700;color:var(--magenta-osc);margin-top:14px}
+  @media (max-width:640px){.cv-modal{padding:0;align-items:flex-end}.cv-caja{max-height:90vh;border-radius:16px 16px 0 0}.cv-cab{padding:20px}.cv-cuerpo{padding:18px 20px 26px}}
+
+  /* Juanas */
+  .juanas{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px}
+  .juana{background:#fff;border-radius:10px;box-shadow:var(--sombra);padding:28px;border-top:5px solid var(--magenta);display:grid;grid-template-columns:150px 1fr;gap:24px;align-items:start}
+  .juana .retrato{width:150px;height:188px;object-fit:cover;object-position:center top;border-radius:75px 75px 8px 8px;box-shadow:0 0 0 4px var(--rosa)}
+  .juana .credito{display:block;margin-top:8px;font-size:.75rem;color:#9A8F94}
+  .juana .anio{display:inline-block;background:var(--magenta);color:#fff;font-family:var(--titulos);font-weight:700;font-size:.85rem;padding:4px 12px;border-radius:999px;margin-bottom:14px}
+  .juana h3{font-size:1.3rem}
+  .juana .apodo{color:var(--magenta);font-family:var(--titulos);font-weight:600;font-size:.95rem;margin:2px 0 10px}
+  .juana p{color:var(--gris);font-size:.97rem}
+
+  /* Historia */
+  .linea{position:relative;margin-top:56px;padding-left:44px}
+  .linea::before{content:"";position:absolute;left:11px;top:6px;bottom:6px;width:3px;background:var(--rosa);border-radius:2px}
+  .hito{position:relative;background:#fff;border-radius:10px;box-shadow:var(--sombra);padding:26px 28px;margin-bottom:24px}
+  .hito::before{content:"";position:absolute;left:-41px;top:30px;width:19px;height:19px;border-radius:50%;background:var(--magenta);border:4px solid var(--crema)}
+  .hito .fecha{display:inline-block;color:var(--magenta);font-family:var(--titulos);font-weight:700;font-size:.9rem;margin-bottom:4px}
+  .hito h3{font-size:1.2rem}
+  .hito p{color:var(--gris);margin-top:6px;font-size:.97rem}
+  .fotos{display:grid;gap:10px;margin-top:16px}
+  .fotos.n1{grid-template-columns:1fr}
+  .hito:has(.fotos){display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);column-gap:32px;align-items:start;grid-auto-rows:min-content}
+  .hito:has(.fotos)>:not(.fotos){grid-column:1}
+  .hito:has(.fotos)>.fecha{justify-self:start}
+  .hito:has(.fotos) .fotos{grid-column:2;grid-row:1/span 6;margin-top:0}
+  .hito:has(.fotos) .fotos.n1 .ft{aspect-ratio:16/10}
+  .hito .ft:has(img[src*="cafe-flyer"]){aspect-ratio:1200/670}
+  .ft img[src*="cafe-flyer"]{object-fit:contain}
+  .fotos.n2{grid-template-columns:1fr 1fr}
+  .ft{border:0;padding:0;background:var(--rosa-claro);border-radius:8px;overflow:hidden;cursor:zoom-in;aspect-ratio:3/2;width:100%;display:block}
+  .ft img{width:100%;height:100%;object-fit:cover;object-position:center 25%}
+  .ft:hover img{opacity:.92}
+  .mas{margin-top:48px}
+  .mas h3{font-size:1.3rem;margin-bottom:16px}
+
+  /* Llamado final */
+  .llamado{position:relative;color:#fff;text-align:center;padding:120px 0 170px;background:var(--vino)}
+  .llamado > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .llamado::after{content:"";position:absolute;inset:0;background:rgba(60,6,34,.72)}
+  .llamado .w{position:relative;z-index:2}
+  .llamado h2{color:#fff;font-size:clamp(1.8rem,3.4vw,2.6rem);max-width:24ch;margin:0 auto 26px}
+  .contacto-tarjetas{position:relative;z-index:3;display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:-110px}
+  .ct{border-radius:10px;padding:34px 32px;box-shadow:0 14px 34px rgba(0,0,0,.18)}
+  .ct h3{font-size:clamp(1.4rem,2.4vw,1.9rem);margin-bottom:10px}
+  .ct p{margin-bottom:18px}
+  .ct.a{background:var(--magenta);color:#fff}.ct.a h3{color:#fff}
+  .ct.b{background:var(--rosa);color:var(--vino)}.ct.b h3{color:var(--vino)}
+
+  /* Pie */
+  footer{background:var(--vino);color:#F3DCE7}
+  .pie{margin-top:70px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.15)}
+  .pie .logo-svg{height:96px;width:auto;color:#fff;margin-bottom:14px}
+  .pie h4{color:#fff;font-size:1rem;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--magenta);display:inline-block}
+  .pie ul{list-style:none;font-size:.93rem}
+  .pie li{margin-bottom:6px}
+  .pie a{text-decoration:none}.pie a:hover{color:#fff;text-decoration:underline}
+  .legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:22px 0;font-size:.85rem;opacity:.8}
+
+
+  /* Aparición al deslizar */
+  .js-anim .rv{opacity:0;transform:translate3d(0,24px,0);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);will-change:opacity,transform}
+  .js-anim .rv.visto{opacity:1;transform:none;will-change:auto}
+  @keyframes aparecerSubir{from{opacity:0;transform:translate3d(0,20px,0)}to{opacity:1;transform:none}}
+  .portada h1{animation:aparecerSubir .8s cubic-bezier(.22,1,.36,1) both}
+  .portada .btn{animation:aparecerSubir .8s cubic-bezier(.22,1,.36,1) both .15s}
+  .mas-nota{color:var(--gris);margin:-8px 0 16px;font-size:.97rem}
+  .carrusel{margin-top:34px}
+  .car-cab{display:flex;align-items:baseline;gap:14px;margin-bottom:14px}
+  .car-cab h4{font-family:var(--titulos);font-size:1.1rem;color:var(--vino)}
+  .car-cant{color:var(--gris);font-size:.9rem}
+  .car-flechas{margin-left:auto;display:flex;gap:8px;align-self:center}
+  .car-btn{width:42px;height:42px;border-radius:50%;border:2px solid var(--magenta);background:#fff;color:var(--magenta);display:grid;place-items:center;cursor:pointer;transition:background .2s,color .2s}
+  .car-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+  .car-btn:hover{background:var(--magenta);color:#fff}
+  .car-btn:disabled{opacity:.35;cursor:default;background:#fff;color:var(--magenta)}
+  .car-pista{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding-bottom:10px;scrollbar-width:thin;scrollbar-color:var(--magenta) transparent}
+  .car-pista:focus-visible{outline:3px solid var(--magenta);outline-offset:4px}
+  .car-pista .ft{flex:0 0 auto;height:280px;width:auto;aspect-ratio:auto;scroll-snap-align:start;background:var(--rosa)}
+  .car-pista .ft img{height:100%;width:auto;max-width:none;object-fit:cover;display:block}
+  .ft:focus-visible,.car-btn:focus-visible{outline:3px solid var(--vino);outline-offset:3px}
+  .visor .visor-nav{position:absolute;top:50%;transform:translateY(-50%);right:auto;width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.14);display:grid;place-items:center;font-size:0}
+  .visor .visor-nav svg{width:26px;height:26px;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+  .visor .visor-nav:hover{background:var(--magenta)}
+  .visor .visor-nav[hidden]{display:none}
+  .visor .visor-ant{left:18px}
+  .visor .visor-sig{left:auto;right:18px}
+  .visor .visor-cont{opacity:.75;font-size:.9rem;margin-top:4px}
+  .prensa{background:var(--magenta);color:#fff;padding:110px 0 120px}
+  .prensa h2{color:#fff;font-size:clamp(1.8rem,3.2vw,2.5rem);margin-bottom:48px}
+  .destacada{position:relative;max-width:900px;margin:0 0 64px;padding-left:clamp(56px,8vw,110px)}
+  .destacada::before{content:"“";position:absolute;left:-4px;top:-.18em;font-family:var(--titulos);font-weight:800;font-size:clamp(6rem,13vw,11rem);line-height:1;color:var(--vino)}
+  .destacada blockquote p{font-family:var(--titulos);font-weight:700;font-size:clamp(1.55rem,3.3vw,2.45rem);line-height:1.22;letter-spacing:-.01em;text-wrap:balance}
+  .destacada figcaption{margin:22px 0 26px;font-size:1.05rem;color:#FFE3EF}
+  .destacada cite{font-style:normal;font-weight:600;color:#fff}
+  .notas{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px;border-top:2px solid rgba(255,255,255,.35)}
+  .notas li{border-bottom:2px solid rgba(255,255,255,.35)}
+  .nota{display:flex;flex-direction:column;gap:8px;padding:26px 0 24px;color:#fff;text-decoration:none}
+  .nota .medio{font-size:.92rem;color:#FFE3EF}
+  .nota .nota-tit{font-family:var(--titulos);font-weight:700;font-size:1.15rem;line-height:1.35;max-width:36ch}
+  .nota .leer{font-family:var(--titulos);font-weight:700;font-size:.88rem;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px;text-decoration-color:rgba(255,255,255,.5)}
+  .nota:hover .leer,.nota:focus-visible .leer{text-decoration-color:#fff}
+  .nota:hover .nota-tit{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px}
+  .nota:focus-visible{outline:3px solid #fff;outline-offset:4px}
+  @media (max-width:760px){.notas{grid-template-columns:1fr}.prensa{padding:80px 0 90px}.destacada{padding-left:44px}.car-pista .ft{width:80vw;height:60vw;max-height:300px}.car-pista .ft img{width:100%;height:100%;object-fit:cover;object-position:center 30%}.car-flechas{display:none}.destacada::before{font-size:4.6rem;top:-.08em;left:-2px}.visor .visor-nav{top:auto;bottom:18px;transform:none}}
+  @media (prefers-reduced-motion:reduce){.car-pista{scroll-behavior:auto}.js-anim .rv{opacity:1;transform:none;transition:none}.portada h1,.portada .btn{animation:none}}
+  /* Visor */
+  .visor{position:fixed;inset:0;background:rgba(40,8,25,.94);display:none;align-items:center;justify-content:center;flex-direction:column;z-index:50;padding:24px}
+  .visor.abierto{display:flex}
+  .visor img{max-width:100%;max-height:82vh;border-radius:6px}
+  .visor p{color:#fff;margin-top:14px;text-align:center}
+  .visor button{position:absolute;top:16px;right:22px;background:none;border:0;color:#fff;font-family:var(--titulos);font-weight:700;cursor:pointer}
+
+  @media (max-width:920px){
+    .ejes,.destacado,.destacado.inv{grid-template-columns:1fr}
+    .destacado .tarj,.destacado.inv .tarj{margin:-50px 18px 0}
+    .destacado.inv .img{order:1}.destacado.inv .tarj{order:2}
+    .juanas,.contacto-tarjetas{grid-template-columns:1fr}
+    .destacado .blob{width:130px;height:130px;left:-24px;top:-36px}
+    .destacado.inv .blob{right:-24px;left:auto;top:auto;bottom:-36px}
+    .equipo{grid-template-columns:repeat(2,1fr)}
+    .hito:has(.fotos){display:block}
+    .hito:has(.fotos) .fotos{margin-top:16px}
+    .pie{grid-template-columns:1fr 1fr}
+    .ejes .foto{aspect-ratio:16/10}
+  }
+  @media (max-width:760px){
+    .abrir{display:block}
+    .menu{display:none;position:absolute;top:84px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--vino);padding:10px 20px 20px}
+    .menu.abierto{display:flex}
+    .menu a{display:block;padding:12px 0}
+    .menu .btn{text-align:center;margin-top:8px}
+    .cifras .caja{grid-template-columns:1fr;gap:18px}
+    .cifra + .cifra{border-left:0;border-top:1px solid #EEE3E8;padding-top:18px}
+    .tarjetas-ejes{grid-template-columns:1fr}
+    .juana{grid-template-columns:1fr}
+    .juana .retrato{width:160px;height:200px}
+    .equipo{grid-template-columns:1fr}
+    .persona{flex-direction:row;align-items:flex-start}
+    .persona img{width:112px;flex-shrink:0;aspect-ratio:4/5;height:auto;margin:18px 0 18px 16px;border-radius:8px;object-position:center 22%}
+    .persona .datos{padding:18px 18px 16px}
+    .persona h3{font-size:1.1rem}
+    .fotos.n2{grid-template-columns:1fr}
+    .hito:has(.fotos){display:block}
+    .hito:has(.fotos) .fotos{margin-top:16px}
+    .sec{padding:80px 0}
+    .linea{padding-left:32px}
+    .hito::before{left:-29px}
+    .linea::before{left:6px}
+    .pie{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<header class="cabecera">
+  <div class="w">
+    <a href="#inicio" class="marca" aria-label="Las Juanas, inicio"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="logo-svg" role="img" aria-label="Logo de Las Juanas" viewBox="0 0 265.487 566.972">
+<path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 86.863281 50.832031 C 96.132812 38.890625 102.066406 39.539062 101.636719 44.945312 C 101.207031 50.359375 92.601562 68.046875 80.8125 72.476562 C 80.8125 72.476562 78.695312 61.355469 86.863281 50.832031 M 116.835938 101.457031 C 116.046875 104.992188 112.628906 114.167969 106.101562 118.03125 C 100.1875 121.535156 97.496094 118.484375 97.601562 116.3125 C 98.542969 96.820312 119.585938 89.175781 116.835938 101.457031 M 112.628906 148.605469 C 111.296875 149.429688 108.34375 146.785156 107.5625 145.425781 C 106.820312 144.136719 106.445312 140.679688 107.734375 139.929688 C 108.960938 139.21875 110.867188 140.789062 111.617188 141.992188 C 112.472656 143.355469 114 147.757812 112.628906 148.605469 M 49.851562 255.609375 C 43.421875 257.429688 39.933594 251.839844 38.226562 244.445312 C 36.507812 237.011719 38.074219 228.433594 45.957031 226.804688 C 53.6875 225.207031 60.15625 252.691406 49.851562 255.609375 M 71.261719 324.886719 C 78.9375 317.785156 86.605469 316.605469 89.875 319.867188 C 94.683594 324.667969 90.527344 334.25 83.402344 341.832031 C 76.605469 349.070312 69.429688 350.648438 64.851562 346.640625 C 61.378906 343.601562 63.976562 331.628906 71.261719 324.886719 M 78.816406 427.457031 C 88.089844 416.691406 108.707031 411.339844 98.746094 431.949219 C 93.570312 442.65625 80.191406 453.105469 72.746094 448.984375 C 68.460938 446.609375 68.304688 439.652344 78.816406 427.457031 M 105.066406 454.164062 C 106.191406 452.21875 107.632812 450.953125 108.289062 451.328125 C 108.949219 451.710938 108.570312 453.59375 107.445312 455.539062 C 106.324219 457.480469 104.882812 458.75 104.226562 458.371094 C 103.566406 457.992188 103.945312 456.109375 105.066406 454.164062 M 63.933594 124.128906 C 60.710938 124.128906 57.480469 122.59375 58.09375 118.289062 C 58.78125 113.480469 60.710938 112.019531 63.933594 112.019531 C 67.160156 112.019531 70.375 115.578125 70.375 118.804688 C 70.375 122.027344 67.160156 124.128906 63.933594 124.128906 M 232.03125 187.363281 C 218.058594 166.753906 211.304688 152.441406 213.9375 144.769531 C 216.570312 137.097656 223.441406 129.882812 216.34375 108.011719 C 216.34375 108.011719 187.257812 6.558594 94.738281 17.667969 C 82.238281 19.167969 76.03125 23.480469 72.800781 26.183594 C 65.867188 30.789062 50.398438 43.964844 51.808594 59.191406 C 52.898438 70.976562 53.304688 69.917969 59.125 76.066406 C 64.464844 81.699219 72.753906 78.699219 72.753906 78.699219 C 72.753906 78.699219 72.980469 80.300781 75.5 87.972656 C 78.019531 95.644531 77.789062 102.972656 77.21875 109.042969 C 76.644531 115.113281 73.324219 116.257812 73.324219 116.257812 C 73.324219 116.257812 73.324219 111.675781 68.746094 109.84375 C 64.164062 108.011719 55.671875 107.515625 54.660156 117.257812 C 53.761719 125.914062 59.175781 126.53125 63.074219 126.621094 C 70.554688 126.789062 73.871094 123.128906 74.125 123.128906 C 74.34375 123.128906 78.003906 124.222656 81.023438 123.097656 C 84.414062 121.835938 87.210938 118.3125 87.695312 117.769531 C 87.851562 117.589844 89.527344 116.914062 89.785156 118.804688 C 92.125 135.957031 105.542969 126.070312 107.820312 124.558594 C 108.507812 130.398438 109.710938 134.777344 117.296875 135.378906 C 124.632812 135.960938 131.695312 127.21875 131.695312 127.21875 C 131.695312 127.21875 133.070312 137.269531 126.628906 143.023438 C 119.527344 149.367188 115.289062 147.9375 115.289062 147.9375 C 115.289062 147.9375 112.582031 134.191406 106.1875 137.785156 C 103.882812 139.078125 104.011719 141.90625 104.011719 141.90625 C 104.011719 141.90625 103.894531 149.769531 112.816406 151.613281 C 112.710938 153.824219 111.46875 159.589844 101.4375 160.152344 C 97.34375 160.382812 87.035156 155.132812 86.691406 144.257812 C 86.464844 137.046875 86.949219 134.921875 85.460938 133.546875 C 83.972656 132.171875 81.914062 131.945312 81.683594 134.003906 C 81.453125 136.066406 80.078125 148.320312 72.867188 158.164062 C 65.652344 168.011719 58.554688 175.800781 51.339844 176.714844 C 44.125 177.632812 41.089844 169.429688 40.460938 166.753906 C 39.085938 160.914062 39.890625 156.5625 44.925781 156.105469 C 49.964844 155.644531 51.109375 161.144531 51.109375 161.144531 C 51.109375 161.144531 52.382812 161.714844 52.605469 160.457031 C 52.828125 159.195312 52.253906 152.324219 45.84375 152.898438 C 39.429688 153.46875 38.171875 155.1875 36.566406 158.625 C 35.144531 161.675781 33.933594 184.273438 50.652344 182.324219 C 64.4375 180.722656 73.441406 172.136719 76.644531 168.242188 C 76.644531 168.242188 81.96875 206.660156 70.003906 238.089844 C 67.160156 245.5625 59.125 249.882812 59.125 249.882812 C 59.125 249.882812 61.1875 224.121094 44.664062 221.402344 C 37.988281 220.304688 34.554688 225.925781 33.707031 232.25 C 30.589844 255.472656 41.835938 263.304688 50.742188 264.046875 C 50.828125 269.238281 51.898438 280.0625 53.59375 284.695312 C 55.734375 290.535156 63.132812 284.808594 63.132812 284.808594 C 61.300781 290.761719 59.496094 294.835938 57.980469 303.703125 C 55.691406 317.097656 65.136719 314.179688 65.136719 314.179688 C 65.136719 314.179688 57.46875 321.179688 55.691406 333.933594 C 52.769531 354.886719 69.316406 355.800781 69.316406 355.800781 C 69.316406 355.800781 68.402344 357.292969 67.828125 358.09375 C 67.253906 358.894531 53.859375 373.78125 64.277344 375.726562 C 74.699219 377.675781 83.171875 363.933594 86.378906 359.582031 C 89.585938 355.230469 91.875 355.230469 93.476562 356.832031 C 95.078125 358.4375 94.074219 360.855469 93.019531 362.671875 C 88.4375 370.574219 72.132812 384.832031 68.171875 390.957031 C 65.652344 394.851562 70.578125 396.222656 73.667969 391.757812 C 75.328125 389.359375 87.410156 377.445312 89.355469 375.152344 C 91.300781 372.863281 94.164062 373.320312 95.652344 374.46875 C 97.140625 375.613281 98.058594 379.390625 94.507812 386.492188 C 89.710938 396.085938 62.21875 412.140625 61.988281 438.476562 C 61.816406 458.335938 80.539062 455.882812 80.539062 455.882812 C 80.539062 455.882812 73.726562 460.511719 78.019531 470.308594 C 83.285156 482.332031 95.652344 471.226562 95.652344 471.226562 C 95.652344 471.226562 95.882812 473.574219 85.664062 485.59375 C 79.160156 493.246094 74.085938 498.011719 68.230469 499.421875 C 58.566406 501.75 56.148438 488.84375 56.082031 485.945312 C 55.863281 476.492188 61.53125 475.117188 57.292969 476.949219 C 53.058594 478.78125 53.113281 486.796875 53.113281 486.796875 C 53.113281 486.796875 52.371094 511.417969 67.714844 508.667969 C 83.058594 505.921875 97.027344 477.179688 100.347656 470.421875 C 103.667969 463.667969 115.578125 452.445312 109.53125 449.46875 C 106.519531 447.984375 101.101562 451.378906 99.660156 459.890625 C 98.515625 466.644531 86.816406 474.460938 83.285156 468.933594 C 78.019531 460.691406 84.828125 459.734375 100.578125 438.476562 C 116.953125 416.375 97.828125 404.46875 80.195312 419.011719 C 73.109375 424.855469 66.226562 433.667969 66.226562 433.667969 C 66.226562 433.667969 65.996094 431.261719 67.828125 424.734375 C 69.660156 418.207031 76.1875 411.339844 83.746094 404.8125 C 91.300781 398.285156 95.011719 395.324219 100.234375 387.0625 C 110.414062 370.953125 98.285156 366.222656 98.285156 366.222656 C 98.285156 366.222656 103.898438 358.664062 100.003906 352.710938 C 96.113281 346.757812 86.378906 355.003906 85.234375 356.261719 C 84.089844 357.519531 74.8125 369.65625 70.003906 372.292969 C 65.195312 374.925781 65.652344 371.71875 65.996094 369.773438 C 66.339844 367.824219 66.914062 366.335938 71.492188 360.152344 C 73.691406 357.183594 78.816406 353.519531 83.859375 348.589844 C 89.316406 343.253906 94.683594 336.550781 96.113281 330.839844 C 98.710938 320.441406 93.898438 306.417969 74.070312 316.925781 C 68.359375 319.957031 60.867188 329.613281 60.671875 328.777344 C 60.214844 326.832031 62.789062 322.941406 71.609375 312.519531 C 80.425781 302.097656 90.335938 284.859375 91.644531 279.3125 C 93.390625 271.925781 88.925781 276.394531 88.667969 278.453125 C 88.558594 279.339844 76.1875 299.007812 70.003906 307.023438 C 63.820312 315.039062 61.300781 307.9375 61.644531 304.847656 C 61.988281 301.757812 63.675781 294.648438 65.914062 288.558594 C 74.617188 264.890625 81.40625 267.148438 81.226562 260.648438 C 81.109375 256.554688 77.675781 259.273438 77.675781 259.273438 C 76.988281 261.679688 66.167969 277.304688 60.328125 281.289062 C 54.488281 285.273438 54.4375 279.460938 55.1875 273.128906 C 55.671875 269.035156 56.648438 265.625 57.609375 263.058594 C 58.433594 262.683594 59.125 262.222656 59.636719 261.695312 C 61.308594 259.96875 80.195312 250.34375 85.234375 217.25 C 90.269531 184.15625 85.804688 150.378906 85.804688 150.378906 C 85.804688 150.378906 90.457031 161.859375 101.117188 161.359375 C 108.019531 161.039062 112.824219 159.621094 115.824219 151.910156 C 120.625 151.945312 128.707031 150.417969 133.070312 143.964844 C 139.164062 134.949219 138.480469 120.261719 138.480469 120.261719 C 138.480469 120.261719 137.675781 109.957031 137.332031 108.242188 C 136.988281 106.523438 136.875 104.804688 134.929688 105.492188 C 132.980469 106.179688 133.097656 108.242188 133.097656 108.242188 C 133.097656 108.242188 133.410156 116.140625 131.722656 120.722656 C 130.503906 124.027344 122.246094 133.660156 117.082031 132.714844 C 108.167969 131.085938 112.640625 118.777344 112.828125 118.089844 C 113.171875 116.828125 126.886719 96.046875 118.125 91.496094 C 103.003906 83.636719 85.242188 120.015625 79.394531 120.378906 C 77.148438 120.515625 77.902344 119.347656 79.738281 115.796875 C 81.570312 112.25 85.003906 101.941406 86.148438 95.53125 C 87.296875 89.117188 84.433594 82.019531 82.828125 78.585938 C 81.957031 76.714844 81.566406 76.105469 81.394531 75.929688 C 86.566406 75.660156 95.769531 66.90625 100.605469 58.6875 C 106.3125 48.992188 109.15625 36.261719 98.285156 37.132812 C 73.515625 39.121094 72.765625 74.910156 72.765625 74.910156 C 72.765625 74.910156 66.167969 78.269531 61.960938 74.832031 C 56.902344 70.707031 52.148438 64.988281 55.003906 52.246094 C 59.347656 32.859375 79.34375 26.351562 84.402344 25.003906 C 95.199219 23.230469 110.5 22.375 124.738281 27.515625 C 146.648438 35.421875 165.160156 61.257812 170.539062 78.355469 C 182.21875 115.453125 185.539062 135.207031 159.089844 175.226562 C 136.304688 209.695312 121.53125 235.226562 118.554688 263.398438 C 115.578125 291.566406 117.179688 339.65625 119.929688 354.3125 C 122.675781 368.972656 129.871094 402.710938 125.425781 428.972656 C 120.023438 460.890625 107.378906 488.511719 96.398438 508.953125 C 87.132812 526.207031 79.40625 538.230469 74.582031 544.625 C 74.582031 544.625 77.378906 543.867188 81.28125 539.183594 C 94.496094 523.332031 124.8125 482.914062 140.367188 450.382812 C 160.523438 408.246094 152.335938 382.910156 157.945312 365.992188 C 164.929688 344.925781 176.855469 335.109375 198.25 324.3125 C 216.972656 314.867188 220.140625 296.488281 220.695312 289.503906 C 221.609375 277.9375 230.3125 273.929688 231.6875 268.890625 C 233.058594 263.855469 231.230469 259.273438 227.105469 258.359375 C 227.105469 258.359375 223.441406 257.671875 222.183594 257.671875 C 220.921875 257.671875 220.007812 256.753906 222.410156 255.039062 C 224.816406 253.320312 227.90625 254.351562 230.082031 250.457031 C 232.257812 246.566406 232.933594 244.042969 232.136719 242.898438 C 231.34375 241.753906 223.441406 238.890625 222.871094 234.65625 C 222.296875 230.417969 221.953125 227.671875 226.878906 226.296875 C 231.800781 224.921875 242.679688 219.199219 243.136719 215.53125 C 243.59375 211.867188 246 207.976562 232.03125 187.363281 "/>
+</svg><span>Las<br>Juanas</span></a>
+    <button class="abrir" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><span></span></button>
+    <ul class="menu" id="menu">
+      <li><a href="#quienes-somos">Quiénes somos</a></li>
+      <li><a href="#integrantes">Integrantes</a></li>
+      <li><a href="#nuestro-nombre">Nuestro nombre</a></li>
+      <li><a href="#historia">Historia</a></li>
+      <li><a href="#prensa">Prensa</a></li>
+      <li><a href="#contacto" class="btn btn-mg">Sumate</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <section class="portada" id="inicio">
+    <img src="img/portada-encuentro.jpg" alt="Decenas de integrantes de Las Juanas reunidas en un jardín, sonriendo a la cámara">
+    <div class="w">
+      <h1>Rescatamos la memoria de nuestras heroínas y trabajamos por los derechos de las mujeres de hoy</h1>
+      <a href="#quienes-somos" class="btn btn-mg">Conocenos</a>
+    </div>
+  </section>
+
+  <div class="cifras">
+    <div class="w">
+      <div class="caja">
+        <div class="cifra"><b>2014</b><span>Año de fundación en Salta</span></div>
+        <div class="cifra"><b>4</b><span>Heroínas que nos dan nombre</span></div>
+        <div class="cifra"><b>+12</b><span>Encuentros, jornadas y movilizaciones</span></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="sec" id="quienes-somos">
+    <div class="w ejes">
+      <div class="foto"><img src="img/ni-una-menos.jpg" alt="Las Juanas en la movilización Ni Una Menos"></div>
+      <div>
+        <h2 class="titulo-sec">Quiénes somos y <em>en qué trabajamos</em></h2>
+        <p class="bajada">Somos una agrupación de mujeres multisectorial y multipartidaria, nacida en Salta en 2014. Honramos el legado de las Juanas con nuevos aportes, actividades y desafíos.</p>
+        <div class="tarjetas-ejes">
+          <div class="eje">
+            <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg></div>
+            <h3>Fortalecer a las mujeres</h3>
+            <p>Acompañar y empoderar a las mujeres de Salta.</p>
+          </div>
+          <div class="eje">
+            <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 7h14M5 7l-3 7a3 3 0 0 0 6 0zM19 7l-3 7a3 3 0 0 0 6 0z"/></svg></div>
+            <h3>Paridad de género</h3>
+            <p>Impulsar la igualdad real de oportunidades y de participación.</p>
+          </div>
+          <div class="eje">
+            <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h3l5 4V6L7 10H4a1 1 0 0 0-1 1zM16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg></div>
+            <h3>Visibilizar problemáticas</h3>
+            <p>Poner en agenda los temas de género y sumar a distintos sectores.</p>
+          </div>
+          <div class="eje">
+            <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 19V5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2zM8 7h6"/></svg></div>
+            <h3>Memoria histórica</h3>
+            <p>Rescatar a las mujeres que la historia dejó en el anonimato.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec crema" id="integrantes">
+    <div class="w">
+      <div class="destacado">
+        <svg class="blob" viewBox="0 0 200 200" aria-hidden="true"><path d="M150 30c30 22 40 70 22 105s-60 55-98 45S10 130 18 92 60 20 95 15s35-7 55 15z" fill="#CB0D6E" opacity=".75"/><path d="M160 22c34 26 44 78 22 116s-68 58-110 46S2 128 12 86 58 8 98 6s40-4 62 16z" fill="none" stroke="#9E0956" stroke-width="2" stroke-dasharray="6 6"/></svg>
+        <div class="img"><img src="img/casa-susana-2.jpg" alt="Encuentro de Las Juanas"></div>
+        <div class="tarj">
+          <h3>Integrantes</h3>
+          <p>Mujeres con trayectoria en la función pública, la educación, el periodismo y los estudios de género.</p>
+        </div>
+      </div>
+      <div class="equipo">
+        <article class="persona">
+          <img src="img/silvia-varg.jpg" alt="María Silvia Varg">
+          <div class="datos">
+            <h3>María Silvia Varg</h3>
+            <span class="rol">Presidenta de la Agrupación Las Juanas</span>
+            <ul>
+              <li>Periodista</li>
+              <li>Maestría en Políticas Sociales</li>
+              <li>Diputada provincial (MC)</li>
+            </ul>
+            <button class="ver-cv" type="button">Ver CV completo</button>
+            <div class="cv-full" hidden>
+              <ul><li>Periodista</li><li>Maestría en Políticas Sociales</li><li>Especialista en Estudios de Género</li><li>Diputada provincial (MC)</li><li>Ocupó diversos cargos públicos en varias gestiones gubernamentales</li></ul>
+            </div>
+          </div>
+        </article>
+        <article class="persona">
+          <img src="img/isabel-salas.jpg" alt="Isabel del Valle Salas">
+          <div class="datos">
+            <h3>Isabel del Valle Salas</h3>
+            <span class="rol">Primera presidenta de la Agrupación Las Juanas</span>
+            <ul>
+              <li>Profesora de Historia</li>
+              <li>P.D. en Políticas Públicas</li>
+              <li>Maestranda en Antropología Social</li>
+            </ul>
+            <button class="ver-cv" type="button">Ver CV completo</button>
+            <div class="cv-full" hidden>
+              <ul><li>Profesora de Historia</li><li>P.D. en Políticas Públicas</li><li>Maestranda en Antropología Social</li><li>Coordinadora General de Desarrollo Social, Municipalidad de Salta (2021-2023)</li></ul>
+            </div>
+          </div>
+        </article>
+        <article class="persona">
+          <img src="img/nancy-montero.jpg" alt="Nancy Montero">
+          <div class="datos">
+            <h3>Nancy Montero</h3>
+            <span class="rol">Integrante de la Mesa Ejecutiva de la Agrupación Las Juanas</span>
+            <ul>
+              <li>Licenciada en Gestión de Políticas Públicas</li>
+              <li>Diputada Provincial – Departamento Capital</li>
+              <li>Presidenta de la Fundación Dr. Rafael Villagrán</li>
+            </ul>
+            <button class="ver-cv" type="button">Ver CV completo</button>
+            <div class="cv-full" hidden>
+              <p>Feminista – Comprometida con la Igualdad de Género – Casada - Mama de Joaquín, Juan Cruz y Simón</p>
+              <h4>Títulos</h4>
+              <ul>
+                <li>De Grado: Licenciada en Gestión de Políticas Públicas – Universidad Nacional -Tres de Febrero – Buenos Aires – Argentina.</li>
+                <li>Pos-grado Facultad Latinoamérica de Ciencias Sociales (FLACSO) – Sede Argentina</li>
+                <li>Diploma Superior Desarrollo, Políticas Públicas e Integración Regional.</li>
+              </ul>
+              <h4>Experiencia laboral más relevante</h4>
+              <ul>
+                <li>Integrante del Gabinete Técnico Interdisciplinario de la Secretaria de la Gobernación de Desarrollo Social</li>
+                <li>Coordinadora General de la Secretaria de la Gobernación de Turismo y Deportes de la Provincia.</li>
+                <li>Interventora General del Programas de Becas Universitarias de la Provincia. Secretaria de la Gobernación de Desarrollo Social</li>
+                <li>Diputada Provincial – Departamento Capital – Por el Partido Justicialista</li>
+                <li>Coordinadora General del Plan de Políticas Públicas “Compromiso Social” dependiente de la Gobernación.</li>
+                <li>Coordinadora General del Ministerio de Justicia, Seguridad y Derechos Humanos.</li>
+                <li>Asesora de la Presidencia Bloque Justicialista Cámara de Diputados de Salta</li>
+                <li>Secretaria Privada del señor Jefe de Gobierno de la Ciudad de Salta Dn. Miguel Ángel Isa.</li>
+                <li>Secretaria de Acción Social – Municipalidad de la Ciudad de Salta</li>
+                <li>Secretaria de Fortalecimiento Institucional del Ministerio de Asuntos Indígenas y Desarrollo Comunitario</li>
+                <li>A Cargo de la Sub- Secretaria de Adultos Mayores</li>
+                <li>Ejecuta el Plan de Fortalecimiento, Empoderamiento e Igualdad de Género para Mujeres de Comunidades Indígenas del Provincial de Salta. (Con Resolución Ministerial) – Ejecutando 20 Talleres en Comunidades</li>
+                <li>Ejecutando 2 (dos) proyectos con la Iniciativa Spotligh junto a Naciones Unidas – Unión Europea – OIT – ONU Mujeres – PNUD – UNFPA y UNICEF</li>
+                <li>Ejecuta Banco de Elementos técnicos de ayuda a personas con discapacidad de Comunidades Indígenas y criollas de la Provincia de Salta</li>
+                <li>Coordina acciones en Comunidades Indígenas con OPS/OMS</li>
+                <li>Integra la Mesa de Trabajo en DDHH – Gobierno de la Provincia</li>
+                <li>Integra la Mesa de Trabajo ODS – Gobierno de la Provincia</li>
+                <li>Participante Comité de Organización del CIMEX -2018 – Con el Protocolo del Voluntariado Articulación de Acciones con el CENOC</li>
+                <li>Desarrollo de Proyecto de Punto Digital –Ministerio de Modernización de la Nación en Municipio con Comunidades Indígenas</li>
+                <li>Diseño e instrumentación Protocolo de Actuación del Ministerio de Asuntos Indígenas, ante situaciones de Violencia de Género</li>
+                <li>Actualmente Asesora - Presidencia Cámara de Diputados de la Provincia de Salta – cargo de Planta Permanente.</li>
+              </ul>
+              <h4>Cargos partidarios</h4>
+              <ul>
+                <li>Integrante del Consejo del Partido Justicialista 2023 al 2027</li>
+                <li>Congresal Nacional 2023-2027</li>
+              </ul>
+              <h4>Participación en ONG – Voluntaria sin fines de lucro</h4>
+              <ul>
+                <li>Integrante de la Mesa Ejecutiva de la “Agrupación Las Juanas” - Espacio Multisectorial de Mujeres – Personería Jurídica Res. 414/2017 - Salta</li>
+                <li>Presidenta de la Fundación Dr. Rafael Villagrán – Personería Jurídica Res. 1063/2020 - Salta</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+        <article class="persona">
+          <img src="img/myrian-pinto.jpg" alt="Myrian Pinto">
+          <div class="datos">
+            <h3>Myrian Pinto</h3>
+            <span class="rol">Integrante de la Agrupación Las Juanas</span>
+            <ul>
+              <li>Profesora en Ciencias Jurídicas y Políticas</li>
+              <li>Concejal de la Ciudad de Salta - Mandato Cumplido 2009 / 2011</li>
+              <li>Creadora del Programa de Lucha contra la Violencia Familiar</li>
+            </ul>
+            <button class="ver-cv" type="button">Ver CV completo</button>
+            <div class="cv-full" hidden>
+              <h4>Perfil profesional</h4>
+              <p class="perfil">Profesional con amplia trayectoria en políticas sociales, gestión pública y derechos humanos. Especialista en regularización de tierras, asistencia social y lucha contra la violencia familiar y de género. Comprometida con la inclusión, la justicia social y el acompañamiento a las familias más vulnerables.</p>
+              <h4>Formación académica</h4>
+              <ul>
+                <li>Profesora en Ciencias Jurídicas y Políticas</li>
+                <li>Posgrado en Políticas Sociales</li>
+              </ul>
+              <h4>Experiencia laboral</h4>
+              <ul>
+                <li>Asesora en Cámara de Diputados de la Provincia de Salta
+                  <ul><li>Jubilada en dicho cargo</li><li>Asesoramiento legislativo y en políticas públicas</li></ul></li>
+                <li>Concejal de la Ciudad de Salta - Mandato Cumplido 2009 / 2011
+                  <ul><li>Representación legislativa y trabajo parlamentario</li><li>Elaboración y acompañamiento de proyectos vinculados a políticas sociales y derechos ciudadanos</li></ul></li>
+                <li>Directora de Programas Sociales de Regularización de Tierras Fiscales
+                  <ul><li>Reubicación de asentamientos</li><li>Adjudicaciones y legalizaciones catastrales</li><li>Acompañamiento social a familias en situación de vulnerabilidad habitacional</li></ul></li>
+                <li>Directora de Cooperadora Asistencial de Salta
+                  <ul><li>Gestión de programas de asistencia social</li><li>Coordinación de recursos y equipos de trabajo para la atención comunitaria</li></ul></li>
+                <li>Creadora del Programa de Lucha contra la Violencia Familiar
+                  <ul><li>Diseño e implementación de programas de prevención y asistencia</li><li>Talleres de concientización contra la violencia de género</li></ul></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+        <article class="persona">
+          <img src="img/cristina-lobo.jpg" alt="Cristina Lobo">
+          <div class="datos">
+            <h3>Cristina Lobo</h3>
+            <span class="rol">Integrante de la Agrupación Las Juanas</span>
+            <ul>
+              <li>Licenciada en Nutrición</li>
+              <li>Secretaria de Estado de Salud Pública</li>
+              <li>Diputada Provincial de Salta (2008-2011)</li>
+            </ul>
+            <button class="ver-cv" type="button">Ver CV completo</button>
+            <div class="cv-full" hidden>
+              <p class="lema">Una mujer de gestión, compromiso social y participación política</p>
+              <p class="titulos-cv">Licenciada en Nutrición | Diplomada en Salud Pública | Experta en Salud Pública | Experta en Administración Hospitalaria y Atención Primaria de la Salud</p>
+              <h4>Presentación personal</h4>
+              <p class="perfil">Soy Cristina Lobo, una mujer cuya vida profesional, institucional y política ha estado profundamente vinculada al compromiso con la salud pública, la justicia social y la participación de las mujeres en los espacios de decisión.</p>
+              <p class="perfil">Soy mamá de tres hijas, abuela de dos nietos y jubilada. Actualmente me encuentro trabajando en el interior de la provincia de Salta, como Gerenta General de un Hospital de Nivel II.</p>
+              <p class="perfil">Como profesional de la salud pública y mujer comprometida con la gestión, mi trayectoria se vinculó con la participación política y la transformación de las instituciones. Desde los inicios, mi camino ha estado marcado por el compromiso con la salud de la comunidad, la defensa de los derechos sociales y la convicción de que las mujeres debemos ocupar espacios de decisión y conducción.</p>
+              <p class="perfil">A lo largo de más de cuatro décadas he transitado distintos ámbitos de la administración pública, el Poder Ejecutivo, el Poder Legislativo, la docencia y las organizaciones profesionales, asumiendo responsabilidades de conducción y participando activamente en la construcción de políticas públicas.</p>
+              <h4>Trayectoria profesional y gestión pública</h4>
+              <p class="perfil">Mis primeros años de actividad profesional estuvieron vinculados al entonces Programa de Salud Rural, hoy Programa de Atención Primaria de la Salud, donde participé desde sus inicios junto al Dr. Tanoni, en el año 1979 dentro del Ministerio de Salud Pública de la Provincia de Salta.</p>
+              <p class="perfil">Durante aproximadamente 23 años desarrollé un intenso trabajo territorial en toda la provincia, acompañando a las distintas áreas operativas en una etapa en la que la mortalidad infantil y la desnutrición constituían problemáticas sanitarias prioritarias. Desde allí impulsamos el abordaje de la nutrición infantil, la alimentación adecuada y el seguimiento del crecimiento y desarrollo de los niños, entendiendo que la salud debía construirse desde el territorio y junto a las comunidades.</p>
+              <p class="perfil">Posteriormente asumí la Jefatura del Programa de Nutrición de la Provincia, desde donde amplié las estrategias de intervención hacia los establecimientos asistenciales y el abordaje integral de la salud materno-infantil.</p>
+              <p class="perfil">Mi recorrido continuó en diferentes espacios de conducción del sistema sanitario, entre ellos:</p>
+              <ul><li>Directora de Programas de Salud.</li><li>Directora General de Programas Comunitarios.</li><li>Consultora para el Desarrollo de Programas de Vigilancia Nutricional para América Latina y El Caribe. - FAO Santiago de Chile y Brasil.</li><li>Asesora para el Desarrollo de un Programa de Vigilancia Epidemiológica Nutricional. Secretaria de Salud de Entre Ríos.</li><li>Directora General de Gestión Sanitaria de la Provincia.</li><li>Secretaria de Estado de Salud Pública, siendo la primera mujer en alcanzar esa responsabilidad en el área, en un contexto institucional y social profundamente conservador y con una conducción históricamente vinculada a profesionales médicos.</li><li>Secretaria de Estado de Nutrición y Alimentación Saludable.</li></ul>
+              <p class="perfil">Desde estos espacios participé en la planificación, organización y conducción de políticas sanitarias provinciales, promoviendo el trabajo interdisciplinario y una concepción integral de la salud pública.</p>
+              <p class="perfil">También participé en la elaboración de importantes documentos técnicos de procedimiento, entre ellos las Normas del Manual del Agente Sanitario, las Normas Perinatales para el Control Obstétrico y las Normas de Crecimiento y Desarrollo infantil.</p>
+              <p class="perfil">Mi aporte estuvo orientado a fortalecer una mirada integral de la salud de la mujer, entendiendo que su atención no debe limitarse exclusivamente a la dimensión obstétrica, sino que debe contemplar también la alimentación, la nutrición, la prevención y las condiciones sociales que determinan su bienestar.</p>
+              <h4>Experiencia en otras áreas del poder ejecutivo</h4>
+              <p class="perfil">Durante la década de 1990 me desempeñé como Coordinadora del Plan provincial de Nutrición y Protección Integral del Escolar, dependiente del Ministerio de Educación, participé en la implementación y organización de políticas alimentarias destinadas a la población escolar, dando impulso al programa de comedores escolares. Este trabajo permitió avanzar en la planificación, normatización y organización de las prestaciones alimentarias.</p>
+              <p class="perfil">También desarrollé funciones en la Dirección General de Relaciones Municipales, dependiente del Ministerio de Gobierno, participando en tareas de monitoreo, supervisión y auditoría de la gestión municipal, particularmente en lo referido a recursos humanos, administración financiera, funcionamiento institucional y acciones comunitarias y sociales.</p>
+              <p class="perfil">Asimismo, ocupé el cargo de la Secretaria de Salud Mental y Adicciones dependiente del Ministerio de Desarrollo Social, donde me tocó organizar, planificar y conformar un equipo multidisciplinario para abordar la problemática de éste flagelo de las adicciones.</p>
+              <p class="perfil">Estas experiencias ampliaron mi visión de la administración pública y me permitieron comprender la importancia de la articulación entre los distintos niveles del Estado.</p>
+              <h4>Trayectoria legislativa</h4>
+              <p class="perfil">Entre los años 2008 y 2011 me desempeñé como Diputada Provincial de Salta, experiencia que representa uno de los capítulos más importantes de mi trayectoria pública. Al incorporarme a la Honorable Cámara de Diputados tuve el honor de presidir la Comisión de Salud, desde donde trabajé en temas vinculados a las políticas sanitarias, la prevención, la atención de la salud y el fortalecimiento del sistema público. Ademas, formé parte del Consejo Federal de Legisladores de Salud (COFELESA) siendo elegida como Secretaria Académica.</p>
+              <p class="perfil">También forme parte de la Comisión Especial de Igualdad Real de Oportunidades y trato entre Mujeres y Varones, donde presente un proyecto relacionado a la paridad en los cargos electivos, el mismo no pude promulgarse durante mi periodo, pero se sancionó la ley posteriormente.</p>
+              <p class="perfil">También ejercí la Presidencia de la Comisión de Adicciones y participé en otras comisiones legislativas, entre ellas las vinculadas a asuntos municipales y actividades productivas, desempeñándome como Vicepresidenta.</p>
+              <p class="perfil">Otro reconocimiento importante fue haber sido elegida por mis pares para representar a la Honorable Cámara de Diputados como miembro titular del Consejo de la Magistratura, responsabilidad que asumí con orgullo y compromiso institucional.</p>
+              <p class="perfil">La experiencia legislativa consolidó mi convicción de que la política es una herramienta fundamental para transformar realidades, ampliar derechos y generar respuestas a las necesidades de la sociedad.</p>
+              <h4>Regreso al ejecutivo: nutrición y alimentación saludable</h4>
+              <p class="perfil">Posteriormente regresé al Poder Ejecutivo provincial, asumiendo como Secretaria de Estado de Nutrición y Alimentación Saludable. Desde este espacio se impulsó una nueva concepción de las políticas alimentarias, superando el abordaje centrado exclusivamente en la desnutrición e incorporando los desafíos vinculados al sobrepeso, la obesidad, las enfermedades crónicas no transmisibles y las enfermedades metabólicas.</p>
+              <p class="perfil">Se promovió un trabajo interdisciplinario, con estrategias de prevención, educación alimentaria y promoción de hábitos saludables, entendiendo que la alimentación constituye un determinante fundamental de la salud y la calidad de vida de la población.</p>
+              <p class="perfil">Finalizada esta etapa de gestión, continué vinculada al ámbito legislativo mediante tareas de asesoramiento en la Cámara de Diputados, principalmente en materia de salud pública.</p>
+              <h4>Docencia y participación profesional</h4>
+              <p class="perfil">Durante la década de 1990 me desempeñé como Profesora de la Cátedra de Salud Pública de la Facultad de Ciencias de la Salud, en la carrera de Licenciatura en Nutrición, de la Universidad Nacional de Salta, contribuyendo a la formación académica de futuros profesionales.</p>
+              <p class="perfil">Asimismo, fui Presidenta del Colegio de Nutricionistas, participando activamente en el fortalecimiento y jerarquización de la profesión.</p>
+              <p class="perfil">Mi compromiso con la formación, la producción técnica y el desarrollo de políticas públicas ha sido una constante a lo largo de mi vida profesional.</p>
+              <h4>Trayectoria política y militancia</h4>
+              <p class="perfil">Soy militante del Partido Justicialista, espacio político con el que me identifico por su tradición de justicia social, compromiso con los sectores populares y defensa de los derechos de la comunidad.</p>
+              <p class="perfil">He desarrollado una militancia activa y sostenida, participando en la vida partidaria, en los procesos electorales y en las distintas instancias de organización política.</p>
+              <p class="perfil">Durante varios años integré las autoridades del Congreso Provincial del Partido Justicialista de Salta, participando de su conducción y vida institucional.</p>
+              <p class="perfil">Mi compromiso político nunca estuvo separado de mi responsabilidad en la gestión pública. Por el contrario, considero que la política debe ser una herramienta de transformación social y que la participación de las mujeres resulta indispensable para construir una sociedad más justa, equitativa y democrática.</p>
+              <h4>Actualidad</h4>
+              <p class="perfil">Actualmente me desempeño como Gerenta General del Hospital El Galpón, establecimiento de salud de complejidad II, ubicado en el sur de la provincia de Salta.</p>
+              <p class="perfil">Desde esta responsabilidad continúo aportando mi experiencia en gestión sanitaria, administración hospitalaria, organización de servicios y fortalecimiento de la atención de salud, con una mirada integral que contempla tanto las necesidades asistenciales como las preventivas y comunitarias.</p>
+              <h4>Mi compromiso como mujer y dirigente</h4>
+              <p class="perfil">Si hay algo que define mi trayectoria es la convicción de que las mujeres tenemos capacidad para conducir, gestionar, construir consensos y ocupar los más altos espacios de decisión.</p>
+              <p class="perfil">Me ha tocado desarrollar responsabilidades en ámbitos donde históricamente predominaban las conducciones masculinas, abriendo caminos desde una formación profesional no médica, pero con la firme convicción de que la salud pública necesita equipos interdisciplinarios, diversidad de miradas y decisiones construidas colectivamente.</p>
+              <p class="perfil">Haber trabajado como Secretaria de Estado de Salud Pública, haber ocupado responsabilidades en el Poder Ejecutivo y Legislativo, y haber sido reconocida por mis pares para asumir representaciones institucionales son experiencias que valoro profundamente.</p>
+              <p class="perfil">Creo en la participación política de las mujeres, en la construcción colectiva, en la pluralidad de ideas y en la necesidad de generar espacios donde nuestras experiencias, nuestras voces y nuestras capacidades tengan protagonismo.</p>
+              <p class="perfil">Hoy, desde mi pertenencia al movimiento justicialista y mi participación en espacios de mujeres, sigo sosteniendo las mismas convicciones que guiaron mi vida: el compromiso social, la defensa de la salud pública, la justicia social y la construcción de oportunidades para las nuevas generaciones de mujeres dirigentes.</p>
+              <p class="perfil cierre">Porque ocupar espacios de poder no debe ser solamente una conquista individual, sino también una responsabilidad colectiva para abrir puertas, generar oportunidades y dejar un camino para las mujeres que vienen.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="nuestro-nombre">
+    <div class="w">
+      <h2 class="titulo-sec">¿Por qué <em>Las Juanas</em>?</h2>
+      <p class="bajada">La historia de la independencia las reconoce como el ejército silenciado: mujeres que acompañaron a las tropas en las campañas libertadoras y atravesaron las clases sociales por la patria. Heroínas olvidadas durante casi dos siglos. Ellas debían ser rescatadas, y eso hicimos.</p>
+      <div class="juanas">
+        <article class="juana">
+          <img class="retrato" src="img/juana-azurduy.jpg" alt="Retrato de Juana Azurduy de Padilla">
+          <div>
+          <span class="anio">1810</span>
+          <h3>Juana Azurduy de Padilla</h3>
+          <div class="apodo">La Generala</div>
+          <p>Se sumó al ejército de Belgrano, que le regaló su propia espada. En 1816 fue nombrada teniente coronel y luchó junto a los gauchos de Güemes. En 2009 fue ascendida a Generala del Ejército Argentino.</p>
+        </div>
+        </article>
+        <article class="juana">
+          <img class="retrato" src="img/juana-moro.jpg" alt="Retrato de Juana Moro de López">
+          <div>
+          <span class="anio">1813</span>
+          <h3>Juana Moro de López</h3>
+          <div class="apodo">La emparedada</div>
+          <p>Lideró en Salta una red de mujeres que espiaba y saboteaba al ejército realista. La condenaron a morir emparedada en su casa y no delató a sus compañeras. Sobrevivió gracias a una vecina que le pasó agua y comida por un boquete en la pared.</p>
+        </div>
+        </article>
+        <article class="juana">
+          <img class="retrato" src="img/juana-gorriti.jpg" alt="Retrato de Juana Manuela Gorriti">
+          <div>
+          <span class="anio">1831</span>
+          <h3>Juana Manuela Gorriti</h3>
+          <div class="apodo">La escritora rebelde</div>
+          <p>Salteña, hija de un combatiente de Güemes y precursora feminista. No resignó su libertad: se fue a Lima con sus hijas, y allí sus tertulias y su obra literaria la hicieron famosa.</p>
+        </div>
+        </article>
+        <article class="juana">
+          <img class="retrato" src="img/juana-manso.jpg" alt="Retrato de Juana Manso">
+          <div>
+          <span class="anio">1854</span>
+          <h3>Juana Manso</h3>
+          <div class="apodo">La educadora</div>
+          <p>Escritora, traductora y precursora feminista. Fundó el «Álbum de Señoritas», defendió la emancipación de las mujeres y fue la primera mujer en integrar la Comisión Nacional de Escuelas.</p>
+            <small class="credito">Foto: Archivo General de la Nación</small>
+        </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec crema" id="historia">
+    <div class="w">
+      <div class="destacado inv">
+        <svg class="blob" viewBox="0 0 200 200" aria-hidden="true"><path d="M150 30c30 22 40 70 22 105s-60 55-98 45S10 130 18 92 60 20 95 15s35-7 55 15z" fill="#F9D3E5"/><path d="M160 22c34 26 44 78 22 116s-68 58-110 46S2 128 12 86 58 8 98 6s40-4 62 16z" fill="none" stroke="#CB0D6E" stroke-width="2" stroke-dasharray="6 6"/></svg>
+        <div class="img"><img src="img/artesanias.jpg" alt="Exposición de artesanías de mujeres de comunidades aborígenes"></div>
+        <div class="tarj">
+          <h3>Nuestra historia</h3>
+          <p>Encuentros, jornadas y movilizaciones que fueron construyendo Las Juanas desde 2014.</p>
+        </div>
+      </div>
+      <div class="linea">
+        <article class="hito">
+          <span class="fecha">2014</span>
+          <h3>Nace Las Juanas</h3>
+          <p>Se crea en Salta la agrupación, multisectorial y multipartidaria.</p>
+        </article>
+        <article class="hito">
+          <span class="fecha">Enero 2016</span>
+          <h3>Reunión en casa de Susana Canela</h3>
+          <p>Uno de los primeros encuentros del grupo.</p>
+          <div class="fotos n2"><button class="ft" data-cap="Reunión en casa de Susana Canela"><img src="img/casa-susana-1.jpg" alt="Reunión en casa de Susana Canela"></button><button class="ft" data-cap="Reunión en casa de Susana Canela"><img src="img/casa-susana-2.jpg" alt="Reunión en casa de Susana Canela"></button></div>
+        </article>
+        <article class="hito">
+          <span class="fecha">Noviembre 2016</span>
+          <h3>Seminario «La mujer en la sociedad moderna. Paridad de género»</h3>
+        </article>
+        <article class="hito">
+          <span class="fecha">18 de noviembre de 2016</span>
+          <h3>Jornada de formación política con Silvina Batakis</h3>
+          <p>Análisis de la coyuntura económica junto a la ex ministra de Economía de la Provincia de Buenos Aires, en el Casa Real Hotel. Organizó el Instituto GESTAR.</p>
+          <div class="fotos n1"><button class="ft" data-cap="Jornada de formación política con Silvina Batakis"><img src="img/batakis.jpg" alt="Jornada de formación política con Silvina Batakis"></button></div>
+        </article>
+        <article class="hito">
+          <span class="fecha">Diciembre 2016</span>
+          <h3>Exposición de artesanías de mujeres de comunidades aborígenes</h3>
+          <p>En el Grand Bourg. Ese mismo mes, Las Juanas se reunieron con el Ministerio de Gobierno de Salta para armar una agenda en común.</p>
+          <div class="fotos n1"><button class="ft" data-cap="Exposición de artesanías de mujeres de comunidades aborígenes"><img src="img/artesanias.jpg" alt="Exposición de artesanías de mujeres de comunidades aborígenes"></button></div>
+        </article>
+        <article class="hito">
+          <span class="fecha">8 de marzo de 2017</span>
+          <h3>Día de la Mujer en el Grand Bourg</h3>
+          <div class="fotos n1"><button class="ft" data-cap="Día de la Mujer en el Grand Bourg"><img src="img/dia-mujer.jpg" alt="Día de la Mujer en el Grand Bourg"></button></div>
+        </article>
+        <article class="hito">
+          <span class="fecha">Mayo 2017</span>
+          <h3>Reunión en la Presidencia de la Cámara de Diputados con Santiago Godoy</h3>
+          <div class="fotos n2"><button class="ft" data-cap="Reunión en la Presidencia de la Cámara de Diputados con Santiago Godoy"><img src="img/diputados-1.jpg" alt="Reunión en la Presidencia de la Cámara de Diputados con Santiago Godoy"></button><button class="ft" data-cap="Reunión en la Presidencia de la Cámara de Diputados con Santiago Godoy"><img src="img/diputados-2.jpg" alt="Reunión en la Presidencia de la Cámara de Diputados con Santiago Godoy"></button></div>
+        </article>
+        <article class="hito">
+          <span class="fecha">3 de junio de 2017</span>
+          <h3>Movilización «Ni Una Menos»</h3>
+          <p>#VivasNosQueremos: Las Juanas en la calle.</p>
+          <div class="fotos n1"><button class="ft" data-cap="Movilización «Ni Una Menos»"><img src="img/ni-una-menos.jpg" alt="Movilización «Ni Una Menos»"></button></div>
+        </article>
+        <article class="hito">
+          <span class="fecha">Junio 2017</span>
+          <h3>Reunión en la Vicegobernación con Miguel Isa</h3>
+          <div class="fotos n1"><button class="ft" data-cap="Reunión en la Vicegobernación con Miguel Isa"><img src="img/vicegob.jpg" alt="Reunión en la Vicegobernación con Miguel Isa"></button></div>
+        </article>
+        <article class="hito">
+          <span class="fecha">Agosto 2017</span>
+          <h3>Clase magistral de Rita Segato</h3>
+          <p>Más de 300 personas participaron de la clase de la antropóloga feminista, organizada junto al Ministerio de Derechos Humanos y Justicia de la Provincia. Fue el cierre de un plan de 100 días para prevenir y erradicar la violencia de género.</p>
+        </article>
+        <article class="hito">
+          <span class="fecha">Diciembre 2017</span>
+          <h3>Visita a la exposición de Navidad del Centro Cultural América</h3>
+          <div class="fotos n1"><button class="ft" data-cap="Visita a la exposición de Navidad del Centro Cultural América"><img src="img/navidad.jpg" alt="Visita a la exposición de Navidad del Centro Cultural América"></button></div>
+        </article>
+        <article class="hito">
+          <span class="fecha">Junio 2018</span>
+          <h3>El Café de las Juanas: «Las Heroínas de la Patria»</h3>
+          <p>Un espacio de debate abierto, en Villa Flora Café.</p>
+          <div class="fotos n1"><button class="ft" data-cap="El Café de las Juanas: «Las Heroínas de la Patria»"><img src="img/cafe-flyer.jpg" alt="El Café de las Juanas: «Las Heroínas de la Patria»"></button></div>
+        </article>
+        <article class="hito">
+          <span class="fecha">Diciembre 2018</span>
+          <h3>Despedida del 2018 en casa de Silvia</h3>
+          <div class="fotos n1"><button class="ft" data-cap="Despedida del 2018 en casa de Silvia"><img src="img/despedida-2018.jpg" alt="Despedida del 2018 en casa de Silvia"></button></div>
+        </article>
+        <article class="hito">
+          <span class="fecha">Agosto 2024</span>
+          <h3>Comunicado: «Basta de violencia contra las mujeres»</h3>
+          <p>Ante el caso Yañez-Fernández, Las Juanas se solidarizaron con Fabiola Yañez y con todas las mujeres que sufren violencia, y rechazaron cualquier forma de violencia contra las mujeres, sin importar quién sea el agresor.</p>
+        </article>
+        <article class="hito">
+          <span class="fecha">1 de agosto de 2026</span>
+          <h3>Reunión de Comisión Directiva y nuevas autoridades</h3>
+          <p>En casa de Silvia, las fundadoras eligieron a Silvia Varg como presidenta y a Nora Giménez como vicepresidenta, tras la gestión de Zulma Pedraza.</p>
+          <div class="fotos n2"><button class="ft" data-cap="Reunión de Comisión Directiva, 1 de agosto de 2026"><img src="img/autoridades-2026-1.jpg" alt="Fundadoras de Las Juanas en la reunión de Comisión Directiva" loading="lazy"></button><button class="ft" data-cap="Reunión de Comisión Directiva, 1 de agosto de 2026"><img src="img/autoridades-2026-2.jpg" alt="Fundadoras de Las Juanas alrededor de la mesa" loading="lazy"></button></div>
+        </article>
+        <article class="hito">
+          <span class="fecha">22 de octubre de 2026</span>
+          <h3>Las Juanas en el Foro Federal Argentino</h3>
+          <p>Silvia Varg representó a la agrupación en el foro sobre el Acuerdo Mercosur–Unión Europea, invitada por la Coordinación de Relaciones Internacionales de la Provincia.</p>
+          <div class="fotos n2"><button class="ft" data-cap="Foro Federal Argentino: Acuerdo Mercosur–Unión Europea"><img src="img/foro-2026-1.jpg" alt="Panel del Foro Federal Argentino" loading="lazy"></button><button class="ft" data-cap="Foro Federal Argentino: Acuerdo Mercosur–Unión Europea"><img src="img/foro-2026-2.jpg" alt="Silvia Varg en el Foro Federal Argentino" loading="lazy"></button></div>
+        </article>
+        <article class="hito">
+          <span class="fecha">Noviembre 2026</span>
+          <h3>Comunicado contra los ataques a personas LGBTIQ+</h3>
+          <p>«La diversidad no es una amenaza: la discriminación y el odio sí lo son.» Las Juanas sostienen que la defensa de los derechos humanos es indivisible.</p>
+        </article>
+      </div>
+      <div class="mas">
+        <h3>Más encuentros y reuniones</h3>
+        <p class="mas-nota">Fotos de distintos momentos de Las Juanas, sin fecha.</p>
+        <div class="carrusel" aria-labelledby="car-encuentros">
+          <div class="car-cab">
+            <h4 id="car-encuentros">Encuentros</h4>
+            <span class="car-cant">13 fotos</span>
+            <div class="car-flechas">
+              <button type="button" class="car-btn" data-dir="-1" aria-label="Fotos anteriores de encuentros"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+              <button type="button" class="car-btn" data-dir="1" aria-label="Más fotos de encuentros"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+            </div>
+          </div>
+          <div class="car-pista" tabindex="0" aria-label="Encuentros: deslizá para ver más fotos">
+            <button class="ft" data-cap="Encuentro de Las Juanas"><img src="img/encuentro-1.jpg" alt="Encuentro de Las Juanas" loading="lazy"></button>
+            <button class="ft" data-cap="Encuentro de Las Juanas"><img src="img/encuentro-2.jpg" alt="Encuentro de Las Juanas" loading="lazy"></button>
+            <button class="ft" data-cap="Encuentro de Las Juanas"><img src="img/enc-01.jpg" alt="Encuentro de Las Juanas" loading="lazy"></button>
+            <button class="ft" data-cap="Encuentro de Las Juanas"><img src="img/enc-05.jpg" alt="Encuentro de Las Juanas" loading="lazy"></button>
+            <button class="ft" data-cap="Encuentro de Las Juanas"><img src="img/enc-09.jpg" alt="Encuentro de Las Juanas" loading="lazy"></button>
+            <button class="ft" data-cap="Encuentro de Las Juanas"><img src="img/enc-12.jpg" alt="Encuentro de Las Juanas" loading="lazy"></button>
+            <button class="ft" data-cap="Encuentro de Las Juanas"><img src="img/enc-13.jpg" alt="Encuentro de Las Juanas" loading="lazy"></button>
+            <button class="ft" data-cap="Encuentro de Las Juanas"><img src="img/enc-16.jpg" alt="Encuentro de Las Juanas" loading="lazy"></button>
+            <button class="ft" data-cap="Encuentro de Las Juanas"><img src="img/enc-17.jpg" alt="Encuentro de Las Juanas" loading="lazy"></button>
+            <button class="ft" data-cap="Encuentro de Las Juanas"><img src="img/enc-18.jpg" alt="Encuentro de Las Juanas" loading="lazy"></button>
+            <button class="ft" data-cap="Encuentro de Las Juanas"><img src="img/enc-19.jpg" alt="Encuentro de Las Juanas" loading="lazy"></button>
+            <button class="ft" data-cap="Encuentro de Las Juanas"><img src="img/enc-23.jpg" alt="Encuentro de Las Juanas" loading="lazy"></button>
+            <button class="ft" data-cap="Encuentro de Las Juanas"><img src="img/enc-25.jpg" alt="Encuentro de Las Juanas" loading="lazy"></button>
+          </div>
+        </div>
+        <div class="carrusel" aria-labelledby="car-calle">
+          <div class="car-cab">
+            <h4 id="car-calle">Marchas y campañas</h4>
+            <span class="car-cant">12 fotos</span>
+            <div class="car-flechas">
+              <button type="button" class="car-btn" data-dir="-1" aria-label="Fotos anteriores de marchas y campañas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+              <button type="button" class="car-btn" data-dir="1" aria-label="Más fotos de marchas y campañas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+            </div>
+          </div>
+          <div class="car-pista" tabindex="0" aria-label="Marchas y campañas: deslizá para ver más fotos">
+            <button class="ft" data-cap="Marchas y campañas"><img src="img/enc-28.jpg" alt="Las Juanas en una marcha" loading="lazy"></button>
+            <button class="ft" data-cap="Marchas y campañas"><img src="img/enc-06.jpg" alt="Las Juanas en una marcha" loading="lazy"></button>
+            <button class="ft" data-cap="Marchas y campañas"><img src="img/enc-02.jpg" alt="Las Juanas en una marcha" loading="lazy"></button>
+            <button class="ft" data-cap="Marchas y campañas"><img src="img/enc-11.jpg" alt="Las Juanas en una marcha" loading="lazy"></button>
+            <button class="ft" data-cap="Marchas y campañas"><img src="img/enc-21.jpg" alt="Las Juanas en una marcha" loading="lazy"></button>
+            <button class="ft" data-cap="Marchas y campañas"><img src="img/enc-26.jpg" alt="Las Juanas en una marcha" loading="lazy"></button>
+            <button class="ft" data-cap="Marchas y campañas"><img src="img/enc-03.jpg" alt="Campaña de Las Juanas contra el maltrato" loading="lazy"></button>
+            <button class="ft" data-cap="Marchas y campañas"><img src="img/enc-20.jpg" alt="Campaña de Las Juanas contra el maltrato" loading="lazy"></button>
+            <button class="ft" data-cap="Marchas y campañas"><img src="img/enc-10.jpg" alt="Campaña de Las Juanas contra el maltrato" loading="lazy"></button>
+            <button class="ft" data-cap="Marchas y campañas"><img src="img/enc-15.jpg" alt="Campaña de Las Juanas contra el maltrato" loading="lazy"></button>
+            <button class="ft" data-cap="Marchas y campañas"><img src="img/enc-07.jpg" alt="Campaña de Las Juanas contra el maltrato" loading="lazy"></button>
+            <button class="ft" data-cap="Marchas y campañas"><img src="img/enc-24.jpg" alt="Campaña de Las Juanas contra el maltrato" loading="lazy"></button>
+          </div>
+        </div>
+        <div class="carrusel" aria-labelledby="car-charlas">
+          <div class="car-cab">
+            <h4 id="car-charlas">Charlas y jornadas</h4>
+            <span class="car-cant">4 fotos</span>
+            <div class="car-flechas">
+              <button type="button" class="car-btn" data-dir="-1" aria-label="Fotos anteriores de charlas y jornadas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+              <button type="button" class="car-btn" data-dir="1" aria-label="Más fotos de charlas y jornadas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+            </div>
+          </div>
+          <div class="car-pista" tabindex="0" aria-label="Charlas y jornadas: deslizá para ver más fotos">
+            <button class="ft" data-cap="Charlas y jornadas"><img src="img/enc-08.jpg" alt="Charla o jornada de Las Juanas" loading="lazy"></button>
+            <button class="ft" data-cap="Charlas y jornadas"><img src="img/enc-27.jpg" alt="Charla o jornada de Las Juanas" loading="lazy"></button>
+            <button class="ft" data-cap="Charlas y jornadas"><img src="img/enc-14.jpg" alt="Charla o jornada de Las Juanas" loading="lazy"></button>
+            <button class="ft" data-cap="Charlas y jornadas"><img src="img/enc-22.jpg" alt="Charla o jornada de Las Juanas" loading="lazy"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="prensa" id="prensa">
+    <div class="w">
+      <h2>Las Juanas en los medios</h2>
+      <figure class="destacada">
+        <blockquote>
+          <p>Las Juanas somos multipartidarias y multisectoriales, lo que nos une es la lucha de los derechos de las mujeres.</p>
+        </blockquote>
+        <figcaption>Zulma Pedraza en <cite>El Expreso de Salta</cite></figcaption>
+        <a class="btn btn-bl" href="https://elexpresodesalta.com.ar/contenido/61732/pedraza-las-juanas-somos-multipartidarias-y-multisectoriales-lo-que-nos-une-es-l" target="_blank" rel="noopener">Leer la entrevista</a>
+      </figure>
+      <ul class="notas">
+        <li><a class="nota" href="https://elexpresodesalta.com.ar/contenido/40684/las-juanas-y-el-caso-fernandez-este-hecho-lamentable-y-repudiable-no-debe-empana" target="_blank" rel="noopener">
+          <span class="medio">El Expreso de Salta, 2024</span>
+          <span class="nota-tit">Las Juanas y el caso Fernández: «¡Este hecho lamentable y repudiable no debe empañar nuestra lucha ni nuestras conquistas!»</span>
+          <span class="leer">Leer la nota</span>
+        </a></li>
+        <li><a class="nota" href="https://elexpresodesalta.com.ar/contenido/35434/guzman-aguirre-en-salta-hay-muchas-redes-que-luchan-por-los-derechos-de-las-muje" target="_blank" rel="noopener">
+          <span class="medio">El Expreso de Salta</span>
+          <span class="nota-tit">Guzmán Aguirre: «En Salta hay muchas redes que luchan por los derechos de las mujeres»</span>
+          <span class="leer">Leer la nota</span>
+        </a></li>
+        <li><a class="nota" href="https://www.salta.gob.ar/prensa/noticias/mas-de-300-personas-participaron-en-una-clase-magistral-a-cargo-de-rita-segato-54346" target="_blank" rel="noopener">
+          <span class="medio">Gobierno de Salta, agosto de 2017</span>
+          <span class="nota-tit">Más de 300 personas participaron en una clase magistral a cargo de Rita Segato</span>
+          <span class="leer">Leer la nota</span>
+        </a></li>
+        <li><a class="nota" href="https://share.google/1B9QellhxHQG7WkWJ" target="_blank" rel="noopener">
+          <span class="medio">Gobierno de Salta, diciembre de 2016</span>
+          <span class="nota-tit">Gobierno trabajará con la agrupación Las Juanas para profundizar la tarea que empodere a las mujeres</span>
+          <span class="leer">Leer la nota</span>
+        </a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="llamado" id="contacto">
+    <img src="img/dia-mujer.jpg" alt="">
+    <div class="w">
+      <h2>Sumate a Las Juanas y seguí construyendo historia con nosotras</h2>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="w contacto-tarjetas">
+    <div class="ct a">
+      <h3>Escribinos</h3>
+      <p>Para participar de nuestras actividades o trabajar con nosotras. <span class="pendiente">Falta el email</span></p>
+      <a href="#contacto" class="btn btn-bl">Enviar un mensaje</a>
+    </div>
+    <div class="ct b">
+      <h3>Seguinos en redes</h3>
+      <p>Enterate de nuestros encuentros y actividades. <span class="pendiente">Faltan los enlaces</span></p>
+      <a href="#contacto" class="btn btn-mg">Instagram</a>
+      <a href="#contacto" class="btn btn-mg">Facebook</a>
+    </div>
+  </div>
+  <div class="w">
+    <div class="pie">
+      <div><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="logo-svg" role="img" aria-label="Logo de Las Juanas" viewBox="0 0 265.487 566.972">
+<path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 86.863281 50.832031 C 96.132812 38.890625 102.066406 39.539062 101.636719 44.945312 C 101.207031 50.359375 92.601562 68.046875 80.8125 72.476562 C 80.8125 72.476562 78.695312 61.355469 86.863281 50.832031 M 116.835938 101.457031 C 116.046875 104.992188 112.628906 114.167969 106.101562 118.03125 C 100.1875 121.535156 97.496094 118.484375 97.601562 116.3125 C 98.542969 96.820312 119.585938 89.175781 116.835938 101.457031 M 112.628906 148.605469 C 111.296875 149.429688 108.34375 146.785156 107.5625 145.425781 C 106.820312 144.136719 106.445312 140.679688 107.734375 139.929688 C 108.960938 139.21875 110.867188 140.789062 111.617188 141.992188 C 112.472656 143.355469 114 147.757812 112.628906 148.605469 M 49.851562 255.609375 C 43.421875 257.429688 39.933594 251.839844 38.226562 244.445312 C 36.507812 237.011719 38.074219 228.433594 45.957031 226.804688 C 53.6875 225.207031 60.15625 252.691406 49.851562 255.609375 M 71.261719 324.886719 C 78.9375 317.785156 86.605469 316.605469 89.875 319.867188 C 94.683594 324.667969 90.527344 334.25 83.402344 341.832031 C 76.605469 349.070312 69.429688 350.648438 64.851562 346.640625 C 61.378906 343.601562 63.976562 331.628906 71.261719 324.886719 M 78.816406 427.457031 C 88.089844 416.691406 108.707031 411.339844 98.746094 431.949219 C 93.570312 442.65625 80.191406 453.105469 72.746094 448.984375 C 68.460938 446.609375 68.304688 439.652344 78.816406 427.457031 M 105.066406 454.164062 C 106.191406 452.21875 107.632812 450.953125 108.289062 451.328125 C 108.949219 451.710938 108.570312 453.59375 107.445312 455.539062 C 106.324219 457.480469 104.882812 458.75 104.226562 458.371094 C 103.566406 457.992188 103.945312 456.109375 105.066406 454.164062 M 63.933594 124.128906 C 60.710938 124.128906 57.480469 122.59375 58.09375 118.289062 C 58.78125 113.480469 60.710938 112.019531 63.933594 112.019531 C 67.160156 112.019531 70.375 115.578125 70.375 118.804688 C 70.375 122.027344 67.160156 124.128906 63.933594 124.128906 M 232.03125 187.363281 C 218.058594 166.753906 211.304688 152.441406 213.9375 144.769531 C 216.570312 137.097656 223.441406 129.882812 216.34375 108.011719 C 216.34375 108.011719 187.257812 6.558594 94.738281 17.667969 C 82.238281 19.167969 76.03125 23.480469 72.800781 26.183594 C 65.867188 30.789062 50.398438 43.964844 51.808594 59.191406 C 52.898438 70.976562 53.304688 69.917969 59.125 76.066406 C 64.464844 81.699219 72.753906 78.699219 72.753906 78.699219 C 72.753906 78.699219 72.980469 80.300781 75.5 87.972656 C 78.019531 95.644531 77.789062 102.972656 77.21875 109.042969 C 76.644531 115.113281 73.324219 116.257812 73.324219 116.257812 C 73.324219 116.257812 73.324219 111.675781 68.746094 109.84375 C 64.164062 108.011719 55.671875 107.515625 54.660156 117.257812 C 53.761719 125.914062 59.175781 126.53125 63.074219 126.621094 C 70.554688 126.789062 73.871094 123.128906 74.125 123.128906 C 74.34375 123.128906 78.003906 124.222656 81.023438 123.097656 C 84.414062 121.835938 87.210938 118.3125 87.695312 117.769531 C 87.851562 117.589844 89.527344 116.914062 89.785156 118.804688 C 92.125 135.957031 105.542969 126.070312 107.820312 124.558594 C 108.507812 130.398438 109.710938 134.777344 117.296875 135.378906 C 124.632812 135.960938 131.695312 127.21875 131.695312 127.21875 C 131.695312 127.21875 133.070312 137.269531 126.628906 143.023438 C 119.527344 149.367188 115.289062 147.9375 115.289062 147.9375 C 115.289062 147.9375 112.582031 134.191406 106.1875 137.785156 C 103.882812 139.078125 104.011719 141.90625 104.011719 141.90625 C 104.011719 141.90625 103.894531 149.769531 112.816406 151.613281 C 112.710938 153.824219 111.46875 159.589844 101.4375 160.152344 C 97.34375 160.382812 87.035156 155.132812 86.691406 144.257812 C 86.464844 137.046875 86.949219 134.921875 85.460938 133.546875 C 83.972656 132.171875 81.914062 131.945312 81.683594 134.003906 C 81.453125 136.066406 80.078125 148.320312 72.867188 158.164062 C 65.652344 168.011719 58.554688 175.800781 51.339844 176.714844 C 44.125 177.632812 41.089844 169.429688 40.460938 166.753906 C 39.085938 160.914062 39.890625 156.5625 44.925781 156.105469 C 49.964844 155.644531 51.109375 161.144531 51.109375 161.144531 C 51.109375 161.144531 52.382812 161.714844 52.605469 160.457031 C 52.828125 159.195312 52.253906 152.324219 45.84375 152.898438 C 39.429688 153.46875 38.171875 155.1875 36.566406 158.625 C 35.144531 161.675781 33.933594 184.273438 50.652344 182.324219 C 64.4375 180.722656 73.441406 172.136719 76.644531 168.242188 C 76.644531 168.242188 81.96875 206.660156 70.003906 238.089844 C 67.160156 245.5625 59.125 249.882812 59.125 249.882812 C 59.125 249.882812 61.1875 224.121094 44.664062 221.402344 C 37.988281 220.304688 34.554688 225.925781 33.707031 232.25 C 30.589844 255.472656 41.835938 263.304688 50.742188 264.046875 C 50.828125 269.238281 51.898438 280.0625 53.59375 284.695312 C 55.734375 290.535156 63.132812 284.808594 63.132812 284.808594 C 61.300781 290.761719 59.496094 294.835938 57.980469 303.703125 C 55.691406 317.097656 65.136719 314.179688 65.136719 314.179688 C 65.136719 314.179688 57.46875 321.179688 55.691406 333.933594 C 52.769531 354.886719 69.316406 355.800781 69.316406 355.800781 C 69.316406 355.800781 68.402344 357.292969 67.828125 358.09375 C 67.253906 358.894531 53.859375 373.78125 64.277344 375.726562 C 74.699219 377.675781 83.171875 363.933594 86.378906 359.582031 C 89.585938 355.230469 91.875 355.230469 93.476562 356.832031 C 95.078125 358.4375 94.074219 360.855469 93.019531 362.671875 C 88.4375 370.574219 72.132812 384.832031 68.171875 390.957031 C 65.652344 394.851562 70.578125 396.222656 73.667969 391.757812 C 75.328125 389.359375 87.410156 377.445312 89.355469 375.152344 C 91.300781 372.863281 94.164062 373.320312 95.652344 374.46875 C 97.140625 375.613281 98.058594 379.390625 94.507812 386.492188 C 89.710938 396.085938 62.21875 412.140625 61.988281 438.476562 C 61.816406 458.335938 80.539062 455.882812 80.539062 455.882812 C 80.539062 455.882812 73.726562 460.511719 78.019531 470.308594 C 83.285156 482.332031 95.652344 471.226562 95.652344 471.226562 C 95.652344 471.226562 95.882812 473.574219 85.664062 485.59375 C 79.160156 493.246094 74.085938 498.011719 68.230469 499.421875 C 58.566406 501.75 56.148438 488.84375 56.082031 485.945312 C 55.863281 476.492188 61.53125 475.117188 57.292969 476.949219 C 53.058594 478.78125 53.113281 486.796875 53.113281 486.796875 C 53.113281 486.796875 52.371094 511.417969 67.714844 508.667969 C 83.058594 505.921875 97.027344 477.179688 100.347656 470.421875 C 103.667969 463.667969 115.578125 452.445312 109.53125 449.46875 C 106.519531 447.984375 101.101562 451.378906 99.660156 459.890625 C 98.515625 466.644531 86.816406 474.460938 83.285156 468.933594 C 78.019531 460.691406 84.828125 459.734375 100.578125 438.476562 C 116.953125 416.375 97.828125 404.46875 80.195312 419.011719 C 73.109375 424.855469 66.226562 433.667969 66.226562 433.667969 C 66.226562 433.667969 65.996094 431.261719 67.828125 424.734375 C 69.660156 418.207031 76.1875 411.339844 83.746094 404.8125 C 91.300781 398.285156 95.011719 395.324219 100.234375 387.0625 C 110.414062 370.953125 98.285156 366.222656 98.285156 366.222656 C 98.285156 366.222656 103.898438 358.664062 100.003906 352.710938 C 96.113281 346.757812 86.378906 355.003906 85.234375 356.261719 C 84.089844 357.519531 74.8125 369.65625 70.003906 372.292969 C 65.195312 374.925781 65.652344 371.71875 65.996094 369.773438 C 66.339844 367.824219 66.914062 366.335938 71.492188 360.152344 C 73.691406 357.183594 78.816406 353.519531 83.859375 348.589844 C 89.316406 343.253906 94.683594 336.550781 96.113281 330.839844 C 98.710938 320.441406 93.898438 306.417969 74.070312 316.925781 C 68.359375 319.957031 60.867188 329.613281 60.671875 328.777344 C 60.214844 326.832031 62.789062 322.941406 71.609375 312.519531 C 80.425781 302.097656 90.335938 284.859375 91.644531 279.3125 C 93.390625 271.925781 88.925781 276.394531 88.667969 278.453125 C 88.558594 279.339844 76.1875 299.007812 70.003906 307.023438 C 63.820312 315.039062 61.300781 307.9375 61.644531 304.847656 C 61.988281 301.757812 63.675781 294.648438 65.914062 288.558594 C 74.617188 264.890625 81.40625 267.148438 81.226562 260.648438 C 81.109375 256.554688 77.675781 259.273438 77.675781 259.273438 C 76.988281 261.679688 66.167969 277.304688 60.328125 281.289062 C 54.488281 285.273438 54.4375 279.460938 55.1875 273.128906 C 55.671875 269.035156 56.648438 265.625 57.609375 263.058594 C 58.433594 262.683594 59.125 262.222656 59.636719 261.695312 C 61.308594 259.96875 80.195312 250.34375 85.234375 217.25 C 90.269531 184.15625 85.804688 150.378906 85.804688 150.378906 C 85.804688 150.378906 90.457031 161.859375 101.117188 161.359375 C 108.019531 161.039062 112.824219 159.621094 115.824219 151.910156 C 120.625 151.945312 128.707031 150.417969 133.070312 143.964844 C 139.164062 134.949219 138.480469 120.261719 138.480469 120.261719 C 138.480469 120.261719 137.675781 109.957031 137.332031 108.242188 C 136.988281 106.523438 136.875 104.804688 134.929688 105.492188 C 132.980469 106.179688 133.097656 108.242188 133.097656 108.242188 C 133.097656 108.242188 133.410156 116.140625 131.722656 120.722656 C 130.503906 124.027344 122.246094 133.660156 117.082031 132.714844 C 108.167969 131.085938 112.640625 118.777344 112.828125 118.089844 C 113.171875 116.828125 126.886719 96.046875 118.125 91.496094 C 103.003906 83.636719 85.242188 120.015625 79.394531 120.378906 C 77.148438 120.515625 77.902344 119.347656 79.738281 115.796875 C 81.570312 112.25 85.003906 101.941406 86.148438 95.53125 C 87.296875 89.117188 84.433594 82.019531 82.828125 78.585938 C 81.957031 76.714844 81.566406 76.105469 81.394531 75.929688 C 86.566406 75.660156 95.769531 66.90625 100.605469 58.6875 C 106.3125 48.992188 109.15625 36.261719 98.285156 37.132812 C 73.515625 39.121094 72.765625 74.910156 72.765625 74.910156 C 72.765625 74.910156 66.167969 78.269531 61.960938 74.832031 C 56.902344 70.707031 52.148438 64.988281 55.003906 52.246094 C 59.347656 32.859375 79.34375 26.351562 84.402344 25.003906 C 95.199219 23.230469 110.5 22.375 124.738281 27.515625 C 146.648438 35.421875 165.160156 61.257812 170.539062 78.355469 C 182.21875 115.453125 185.539062 135.207031 159.089844 175.226562 C 136.304688 209.695312 121.53125 235.226562 118.554688 263.398438 C 115.578125 291.566406 117.179688 339.65625 119.929688 354.3125 C 122.675781 368.972656 129.871094 402.710938 125.425781 428.972656 C 120.023438 460.890625 107.378906 488.511719 96.398438 508.953125 C 87.132812 526.207031 79.40625 538.230469 74.582031 544.625 C 74.582031 544.625 77.378906 543.867188 81.28125 539.183594 C 94.496094 523.332031 124.8125 482.914062 140.367188 450.382812 C 160.523438 408.246094 152.335938 382.910156 157.945312 365.992188 C 164.929688 344.925781 176.855469 335.109375 198.25 324.3125 C 216.972656 314.867188 220.140625 296.488281 220.695312 289.503906 C 221.609375 277.9375 230.3125 273.929688 231.6875 268.890625 C 233.058594 263.855469 231.230469 259.273438 227.105469 258.359375 C 227.105469 258.359375 223.441406 257.671875 222.183594 257.671875 C 220.921875 257.671875 220.007812 256.753906 222.410156 255.039062 C 224.816406 253.320312 227.90625 254.351562 230.082031 250.457031 C 232.257812 246.566406 232.933594 244.042969 232.136719 242.898438 C 231.34375 241.753906 223.441406 238.890625 222.871094 234.65625 C 222.296875 230.417969 221.953125 227.671875 226.878906 226.296875 C 231.800781 224.921875 242.679688 219.199219 243.136719 215.53125 C 243.59375 211.867188 246 207.976562 232.03125 187.363281 "/>
+</svg><p>Agrupación de mujeres multisectorial y multipartidaria. Salta, Argentina.</p></div>
+      <div><h4>Índice</h4><ul><li><a href="#inicio">Inicio</a></li><li><a href="#quienes-somos">Quiénes somos</a></li><li><a href="#integrantes">Integrantes</a></li></ul></div>
+      <div><h4>Contenido</h4><ul><li><a href="#nuestro-nombre">Nuestro nombre</a></li><li><a href="#historia">Historia</a></li><li><a href="#prensa">Prensa</a></li><li><a href="#contacto">Contacto</a></li></ul></div>
+      <div><h4>Contacto</h4><ul><li>Salta, Argentina</li><li><span class="pendiente">Email y redes</span></li></ul></div>
+    </div>
+    <div class="legal"><span>© Las Juanas · Agrupación de mujeres de Salta</span><span>Desde 2014</span></div>
+  </div>
+</footer>
+
+<div class="cv-modal" id="cvModal" role="dialog" aria-modal="true" aria-labelledby="cvNombre"><div class="cv-caja"><div class="cv-cab"><img alt=""><div><h3 id="cvNombre"></h3><span class="rol"></span></div><button class="cv-cerrar" type="button" aria-label="Cerrar">×</button></div><div class="cv-cuerpo"></div></div></div>
+<div class="visor" id="visor" role="dialog" aria-modal="true" aria-label="Foto ampliada"><button class="visor-cerrar" type="button">Cerrar</button><button class="visor-nav visor-ant" type="button" aria-label="Foto anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><img alt=""><button class="visor-nav visor-sig" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button><p></p><p class="visor-cont"></p></div>
+<script>
+  const abrir=document.querySelector('.abrir'),menu=document.getElementById('menu');
+  abrir.addEventListener('click',()=>{const a=menu.classList.toggle('abierto');abrir.setAttribute('aria-expanded',a)});
+  menu.addEventListener('click',e=>{if(e.target.tagName==='A'){menu.classList.remove('abierto');abrir.setAttribute('aria-expanded',false)}});
+  const cvm=document.getElementById('cvModal');let cvOrigen=null;
+  const cerrarCv=()=>{cvm.classList.remove('abierto');document.body.style.overflow='';if(cvOrigen)cvOrigen.focus()};
+  document.querySelectorAll('.ver-cv').forEach(b=>b.addEventListener('click',()=>{const p=b.closest('.persona');cvOrigen=b;
+    cvm.querySelector('img').src=p.querySelector('img').src;cvm.querySelector('img').alt=p.querySelector('h3').textContent;
+    cvm.querySelector('h3').textContent=p.querySelector('h3').textContent;cvm.querySelector('.cv-cab .rol').textContent=p.querySelector('.rol').textContent;
+    cvm.querySelector('.cv-cuerpo').innerHTML=p.querySelector('.cv-full').innerHTML;cvm.querySelector('.cv-cuerpo').scrollTop=0;
+    cvm.classList.add('abierto');document.body.style.overflow='hidden';cvm.querySelector('.cv-cerrar').focus()}));
+  cvm.addEventListener('click',e=>{if(e.target===cvm||e.target.closest('.cv-cerrar'))cerrarCv()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&cvm.classList.contains('abierto'))cerrarCv()});
+  const v=document.getElementById('visor'),vImg=v.querySelector('img'),vCap=v.querySelector('p'),vCont=v.querySelector('.visor-cont');
+  let vLista=[],vI=0,vOrigen=null;
+  const vMostrar=()=>{const b=vLista[vI],i=b.querySelector('img');vImg.src=i.src;vImg.alt=i.alt;vCap.textContent=b.dataset.cap;
+    const varias=vLista.length>1;vCont.textContent=varias?(vI+1)+' de '+vLista.length:'';v.querySelectorAll('.visor-nav').forEach(n=>n.hidden=!varias)};
+  const vCerrar=()=>{v.classList.remove('abierto');document.body.style.overflow='';if(vOrigen)vOrigen.focus()};
+  const vMover=d=>{vI=(vI+d+vLista.length)%vLista.length;vMostrar()};
+  document.querySelectorAll('.ft').forEach(b=>b.addEventListener('click',()=>{const g=b.closest('.car-pista,.fotos');vLista=[...g.querySelectorAll('.ft')];vI=vLista.indexOf(b);vOrigen=b;
+    vMostrar();v.classList.add('abierto');document.body.style.overflow='hidden';v.querySelector('.visor-cerrar').focus()}));
+  v.querySelector('.visor-ant').addEventListener('click',e=>{e.stopPropagation();vMover(-1)});
+  v.querySelector('.visor-sig').addEventListener('click',e=>{e.stopPropagation();vMover(1)});
+  v.addEventListener('click',e=>{if(e.target===v||e.target.closest('.visor-cerrar'))vCerrar()});
+  document.addEventListener('keydown',e=>{if(!v.classList.contains('abierto'))return;if(e.key==='Escape')vCerrar();if(e.key==='ArrowLeft'&&vLista.length>1)vMover(-1);if(e.key==='ArrowRight'&&vLista.length>1)vMover(1)});
+  // swipe en el visor
+  let tx=null;v.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+  v.addEventListener('touchend',e=>{if(tx===null||vLista.length<2)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)vMover(dx<0?1:-1);tx=null});
+  document.querySelectorAll('.carrusel').forEach(c=>{const pista=c.querySelector('.car-pista'),[ant,sig]=c.querySelectorAll('.car-btn');
+    const act=()=>{ant.disabled=pista.scrollLeft<4;sig.disabled=pista.scrollLeft+pista.clientWidth>=pista.scrollWidth-4};
+    c.querySelectorAll('.car-btn').forEach(btn=>btn.addEventListener('click',()=>pista.scrollBy({left:+btn.dataset.dir*pista.clientWidth*0.8})));
+    pista.addEventListener('scroll',act,{passive:true});window.addEventListener('resize',act);pista.querySelectorAll('img').forEach(i=>i.addEventListener('load',act));act()});
+
+  (function(){
+    if(!('IntersectionObserver' in window))return;
+    const els=[...document.querySelectorAll('.cifras .caja, .ejes .foto, .titulo-sec, .bajada, .eje, .destacado, .persona, .juana, .hito, .mas, .destacada, .llamado .w, .ct, .pie')];
+    const alto=window.innerHeight;
+    // lo que ya se ve al abrir la página no se anima
+    const abajo=els.filter(el=>el.getBoundingClientRect().top>alto*0.9);
+    document.documentElement.classList.add('js-anim');
+    abajo.forEach(el=>el.classList.add('rv'));
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){
+      // si entran varios juntos (tarjetas de una misma fila), aparecen en cascada corta
+      const hermanos=[...e.target.parentElement.children].filter(c=>c.classList.contains('rv')&&!c.classList.contains('visto'));
+      const i=Math.max(0,hermanos.indexOf(e.target));
+      e.target.style.transitionDelay=Math.min(i,3)*0.08+'s';
+      e.target.classList.add('visto');io.unobserve(e.target)}}),{threshold:0,rootMargin:'0px 0px -6% 0px'});
+    abajo.forEach(el=>io.observe(el));
+  })();
+</script>
+</body>
+</html>
